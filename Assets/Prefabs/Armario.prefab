@@ -534,6 +534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 152036740437514662}
+  - component: {fileID: 6863722488145694898}
   m_Layer: 0
   m_Name: Armario
   m_TagString: Untagged
@@ -562,6 +563,18 @@ Transform:
   - {fileID: 751365402521795766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!156049354 &6863722488145694898
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623087519615425971}
+  m_Enabled: 1
+  m_CellSize: {x: 2, y: 0.66, z: 1.2967}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
 --- !u!1 &6792152284237297719
 GameObject:
   m_ObjectHideFlags: 0
