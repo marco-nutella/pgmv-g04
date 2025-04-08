@@ -19,7 +19,8 @@ public class CabinetGenerator : MonoBehaviour
     private GameObject[] cabinets;
     private GameObject[] doors;
     private GameObject[] modules;
-    private Grid placementGrid = gameObject.GetComponent<Grid>();
+    [SerializeField]
+    private Grid placementGrid; //= gameObject.GetComponent<Grid>()
     void Start()
     {
       
@@ -27,8 +28,8 @@ public class CabinetGenerator : MonoBehaviour
 
 
     private int[] GetCabinetHeights(int width, int height) {
-        int stackedCabinets = Mathf.Ceil(height/3); // Lógica de fazer a "stack" das cabinetes caso a altura seja maior do que 3
-        int[] cabinetHeights = {stackedCabinets};
+        float stackedCabinets = Mathf.Ceil(height/3); // Lógica de fazer a "stack" das cabinetes caso a altura seja maior do que 3
+        int[] cabinetHeights = {(int) stackedCabinets};
         // 1 > 1/3 = 0.33 > 1
         // 2 > 2/3 = 0.67 > 1
         // 5 > 5/3 = 1.67 > 2
@@ -48,7 +49,7 @@ public class CabinetGenerator : MonoBehaviour
             cabinetHeights[1] = heightDivRemainder == 0 ? 3 : heightDivRemainder;
         }
 
-        return cabinetHeights
+        return cabinetHeights;
     }
 
     private void PlaceCabinet() {
@@ -73,10 +74,10 @@ public class CabinetGenerator : MonoBehaviour
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < stackedCabinets; j++) {
-                int currentCabinetHeight = cabinetHeights[j]
+                int currentCabinetHeight = cabinetHeights[j];
 
                 GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
-                cabinets[iters] = new GameObject;
+                cabinets[iters] = new GameObject();
                 iters++;
             }
         }
