@@ -6,28 +6,53 @@ public class LampScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    Light myLight;
+    public GameObject Lamp;
     private bool isLightOn = false;
 
     void Start()
     {
-        myLight = GetComponent<Light>();
+        
+        // Encontrar o candeeiro na scene
+        Lamp = GameObject.Find("Lamp");
+        if (Lamp == null)
+        {
+            Debug.LogError("Lamp object not found in the scene.");
+            return;
+        }
+
+        // Light myLight = Lamp.GetComponent<Light>();
+        // if (myLight == null)
+        // {
+        //     Debug.LogError("No Light component found on the lamp object.");
+        //     return;
+        // }
 
     }
 
-    // Update is called once per frame
-    void OnMouseDown()
+    void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.E))
-        // {
-        //     myLight.enabled = !myLight.enabled;
-        // }
-        if (myLight != null) 
+        // Check for mouse click
+        if (Input.GetMouseButtonDown(0)) // 0 é lado esquerdo do rato
         {
-            isLightOn = !isLightOn; 
-            myLight.enabled = isLightOn; // Turn the light on or off
-            // use GameObject.SetActive(isLightOn); to toggle the whole GameObject if the light is a child object
+            // Check if the mouse is over the lamp
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.gameObject == Lamp)
+                {
+                    isLightOn = !isLightOn;
+                    Lamp.SetActive(isLightOn);
+                }
+            }
         }
+        // if (myLight != null) 
+        // {
+        //     isLightOn = !isLightOn; 
+        //     myLight.enabled = isLightOn; // Turn the light on or off
+        //     // GameObject.SetActive(isLightOn); to toggle the whole GameObject if the light is a child object
+        // }
 
     }
 }
+
