@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class LampScript : MonoBehaviour
 {
-    // Start is called before the first frame update
 
+    
     public GameObject Lamp;
     private bool isLightOn = false;
+    private Collider lampCollider; 
 
     void Start()
     {
         
-        // Encontrar o candeeiro na scene
+        //Encontrar o candeeiro na scene
         Lamp = GameObject.Find("Lamp");
         if (Lamp == null)
         {
             Debug.LogError("Lamp object not found in the scene.");
             return;
         }
-
-        // Light myLight = Lamp.GetComponent<Light>();
-        // if (myLight == null)
+        // lampCollider = Lamp.GetComponent<Collider>();
+        // if (lampCollider == null)
         // {
-        //     Debug.LogError("No Light component found on the lamp object.");
+        //     Debug.LogError("O objeto Lamp não possui um Collider. Adicione um Collider (ex: Box Collider) ao objeto.");
+        //     enabled = false; 
         //     return;
         // }
+
+        Lamp.SetActive(isLightOn);
 
     }
 
@@ -39,7 +42,12 @@ public class LampScript : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.gameObject == Lamp)
+                // if (hit.transform.gameObject == Lamp)
+                // {
+                //     isLightOn = !isLightOn;
+                //     Lamp.SetActive(isLightOn);
+                // }
+                if (hit.collider == lampCollider)
                 {
                     isLightOn = !isLightOn;
                     Lamp.SetActive(isLightOn);
