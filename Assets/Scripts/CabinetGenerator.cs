@@ -23,6 +23,7 @@ public class CabinetGenerator : MonoBehaviour
     private List<GameObject> cabinets = new List<GameObject>();
     private GameObject[] doors;
     private GameObject[] modules;
+<<<<<<< Updated upstream
     [SerializeField]
     private Grid placementGrid; //= gameObject.GetComponent<Grid>()
 
@@ -39,19 +40,38 @@ public class CabinetGenerator : MonoBehaviour
 
         List<int> cabinetHeights = new List<int>();
         cabinetHeights.Add((int) stackedCabinets);
+=======
+    private Grid placementGrid = gameObject.GetComponent<Grid>();
+    void Start()
+    {
+      
+    }
+
+
+    private int[] GetCabinetHeights(int width, int height) {
+        int stackedCabinets = Mathf.Ceil(height/3); // Lógica de fazer a "stack" das cabinetes caso a altura seja maior do que 3
+        int[] cabinetHeights = {stackedCabinets};
+>>>>>>> Stashed changes
         // 1 > 1/3 = 0.33 > 1
         // 2 > 2/3 = 0.67 > 1
         // 5 > 5/3 = 1.67 > 2
         if (stackedCabinets > 1) {
             int i = 1;
+<<<<<<< Updated upstream
             int remainingHeight = (int) height;
             while (remainingHeight > 3) { // temos certeza que vai ser um armário de tamanho 3. poderíamos fazer == 3, mas desta forma podemos executar as linhas asseguir do loop sem precisar verificar se k ~= 0
                 cabinetHeights.Add(3);
+=======
+            int remainingHeight = height;
+            while (remainingHeight > 3) { // temos certeza que vai ser um armário de tamanho 3. poderíamos fazer == 3, mas desta forma podemos executar as linhas asseguir do loop sem precisar verificar se k ~= 0
+                cabinetHeights[i] = 3;
+>>>>>>> Stashed changes
                 remainingHeight-=3; // reduzimos o tamanho de uma cabinete de tamanho integral
                 i++;
             }
             
             int heightDivRemainder = remainingHeight%3; // A altura desejada se for menor ou maior que 3, 0 se for 3
+<<<<<<< Updated upstream
             cabinetHeights.Add(heightDivRemainder == 0 ? 3 : heightDivRemainder);
         } else {
             int heightDivRemainder = (int) height%3;
@@ -102,11 +122,51 @@ public class CabinetGenerator : MonoBehaviour
                 cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
                 iters++;
             }
+=======
+            cabinetHeights[i] = heightDivRemainder == 0 ? 3 : heightDivRemainder;
+        } else {
+            int heightDivRemainder = height%3;
+            cabinetHeights[1] = heightDivRemainder == 0 ? 3 : heightDivRemainder;
+>>>>>>> Stashed changes
         }
 
+        return cabinetHeights
+    }
+
+<<<<<<< Updated upstream
 
 
+=======
+    private void PlaceCabinet() {
 
+    }
+
+    private void PlaceComponent() {
+        
+    }
+    public void GenerateCabinet(XmlNode cabinetSettings)
+    {
+        int width = int.Parse(cabinetSettings.Attributes["Width"].Value);
+        int height = int.Parse(cabinetSettings.Attributes["Height"].Value);
+
+        if (width <= 0 || height <= 0) { // Verificar se os valores são válidos
+            Debug.LogError("Cabinet width or height are invalid or null. Width: " + width + " Height:" + height );
+        }
+
+        int[] cabinetHeights = GetCabinetHeights(width, height);
+        int stackedCabinets = cabinetHeights[0];
+        int iters = 0;
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < stackedCabinets; j++) {
+                int currentCabinetHeight = cabinetHeights[j]
+
+                GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
+                cabinets[iters] = new GameObject;
+                iters++;
+            }
+        }
+>>>>>>> Stashed changes
         /* https://discussions.unity.com/t/how-do-you-set-prefabs-into-a-gameobject-array-that-will-activate-deactivate-when-called/180007
          https://gamedev.stackexchange.com/questions/142451/how-to-instantiate-an-array-of-prefabs-in-c-script
         {
@@ -127,11 +187,14 @@ public class CabinetGenerator : MonoBehaviour
         2 - utilizando as coordenadas locais do armário, encontrar o "snapping point" da grid
         3 - colocar o objeto nessa posição com (GetCellCenterWorld)
         */
+<<<<<<< Updated upstream
     }
 
     void Start()
     {
         GenerateCabinet();
+=======
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
