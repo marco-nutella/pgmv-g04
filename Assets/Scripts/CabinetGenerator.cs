@@ -89,7 +89,7 @@ public class CabinetGenerator : MonoBehaviour
            if (j > 0) {
                 //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
                 transform.position = rowStartingPosition;
-                transform.position += transform.up * 5.75f * j; // Posicionar de acordo com a altura, hard-coded por agora, mudar
+                transform.position += transform.up * 5.4f * j; // Posicionar de acordo com a altura, hard-coded por agora, mudar
                 rowStartingPosition = transform.position;
            }
 
