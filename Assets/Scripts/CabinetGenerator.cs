@@ -23,8 +23,6 @@ public class CabinetGenerator : MonoBehaviour
     private List<GameObject> cabinets = new List<GameObject>();
     private GameObject[] doors;
     private GameObject[] modules;
-    [SerializeField]
-    private Grid placementGrid; //= gameObject.GetComponent<Grid>()
 
     private XmlNodeList ReadXmlFile(TextAsset textAsset) {
         cabinetData = new XmlDocument();
@@ -61,8 +59,28 @@ public class CabinetGenerator : MonoBehaviour
         return cabinetHeights;
     }
 
-    private void PlaceCabinet() {
+    private void PlaceCabinets(int width, int height) {
+        List<int> cabinetHeights = GetCabinetHeights(width, (float) height);
+        int stackedCabinets = cabinetHeights[0];
 
+        transform.position += -transform.right * (4*2); // para fazer o off-set do "ir à direita" inicial
+        Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
+        for (int j = 0; j < stackedCabinets; j++) { // O próprio transform irá mudar de posição e sevirá de "base" para ir botando as cabinetes
+            int currentCabinetHeight = cabinetHeights[j+1];
+            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
+
+           if (j > 0) {
+                //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
+                transform.position = rowStartingPosition;
+                transform.position += transform.up * (5.4f*2); // * j Posicionar de acordo com a altura, hard-coded por agora, mudar
+                rowStartingPosition = transform.position; // possivel bug aqui que faz com que fileiras acima da segunda fiquem muito acima de onde deveriam
+           }
+
+            for (int i = 0; i < width; i++) { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
+                transform.position += transform.right * (4*2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
+                cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
+            }
+        }
     }
 
     private void PlaceComponent() {
@@ -80,30 +98,7 @@ public class CabinetGenerator : MonoBehaviour
             Debug.LogError("Cabinet width or height are invalid or null. Width: " + width + " Height:" + height );
         }
 
-        List<int> cabinetHeights = GetCabinetHeights(width, (float) height);
-        int stackedCabinets = cabinetHeights[0];
-        int iters = 0;
-
-        Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
-        for (int j = 0; j < stackedCabinets; j++) { // O próprio transform irá mudar de posição e sevirá de "base" para ir botando as cabinetes
-           if (j > 0) {
-                //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
-                transform.position = rowStartingPosition;
-                transform.position += transform.up * 5.4f * j; // Posicionar de acordo com a altura, hard-coded por agora, mudar
-                rowStartingPosition = transform.position;
-           }
-
-            for (int i = 0; i < width; i++) { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
-                int currentCabinetHeight = cabinetHeights[j+1];
-
-                GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
-
-                transform.position += transform.right * 4; // Posicionar de acordo com a largura, hard-coded por agora, mudar
-                cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                iters++;
-            }
-        }
-
+        PlaceCabinets(width, height);
 
 
 
