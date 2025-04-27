@@ -146,7 +146,11 @@ PrefabInstance:
     - target: {fileID: 2097558719365765473, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_Mesh
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 1352542578}
+=======
+      objectReference: {fileID: 1987353635}
+>>>>>>> Stashed changes
     - target: {fileID: 2097558719365765473, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_VersionIndex
       value: 44
@@ -154,7 +158,11 @@ PrefabInstance:
     - target: {fileID: 2858816417885806875, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_Mesh
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 1066019738}
+=======
+      objectReference: {fileID: 284495839}
+>>>>>>> Stashed changes
     - target: {fileID: 2858816417885806875, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_VersionIndex
       value: 44
@@ -162,7 +170,11 @@ PrefabInstance:
     - target: {fileID: 2978809966743652702, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_Mesh
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 1288554248}
+=======
+      objectReference: {fileID: 1838053130}
+>>>>>>> Stashed changes
     - target: {fileID: 2978809966743652702, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_VersionIndex
       value: 44
@@ -174,7 +186,11 @@ PrefabInstance:
     - target: {fileID: 3143297039751398147, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_Mesh
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 1990010319}
+=======
+      objectReference: {fileID: 916122904}
+>>>>>>> Stashed changes
     - target: {fileID: 3143297039751398147, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_VersionIndex
       value: 44
@@ -254,7 +270,11 @@ PrefabInstance:
     - target: {fileID: 6710538053662925173, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_Mesh
       value: 
+<<<<<<< Updated upstream
       objectReference: {fileID: 539411193}
+=======
+      objectReference: {fileID: 1878483627}
+>>>>>>> Stashed changes
     - target: {fileID: 6710538053662925173, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
       propertyPath: m_VersionIndex
       value: 44
@@ -2433,6 +2453,7 @@ Mesh:
     size: 0
     path: 
 --- !u!43 &495293168
+<<<<<<< Updated upstream
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2598,6 +2619,8 @@ Mesh:
     size: 0
     path: 
 --- !u!43 &539411193
+=======
+>>>>>>> Stashed changes
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6843,6 +6866,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6924,6 +6949,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e286cf79a33654bb5857632ac7c559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b5d7109da746940b20823eada5e6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+>>>>>>> Stashed changes
 --- !u!43 &1006267116
 Mesh:
   m_ObjectHideFlags: 0
@@ -7419,6 +7473,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
+<<<<<<< Updated upstream
 --- !u!43 &1066019738
 Mesh:
   m_ObjectHideFlags: 0
@@ -7584,6 +7639,8 @@ Mesh:
     offset: 0
     size: 0
     path: 
+=======
+>>>>>>> Stashed changes
 --- !u!43 &1109041658
 Mesh:
   m_ObjectHideFlags: 0
@@ -8574,6 +8631,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
+<<<<<<< Updated upstream
 --- !u!43 &1288554248
 Mesh:
   m_ObjectHideFlags: 0
@@ -8739,6 +8797,8 @@ Mesh:
     offset: 0
     size: 0
     path: 
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &1303291432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11330,12 +11390,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850e8cd4e4ec4407abcca0c7d3dfe3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Lamp: {fileID: 135484614}
 --- !u!4 &1646287025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e5ee861f1503b34fb6d1eb7d7c49dcd, type: 3}
   m_PrefabInstance: {fileID: 111750190}
   m_PrefabAsset: {fileID: 0}
+=======
+  Lamp: {fileID: 705507993}
+>>>>>>> Stashed changes
 --- !u!1 &1664107523
 GameObject:
   m_ObjectHideFlags: 0
@@ -13222,6 +13286,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
+<<<<<<< Updated upstream
 --- !u!1 &1934365393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8738622988110265040, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
@@ -13245,6 +13310,8 @@ MonoBehaviour:
   - {fileID: 8691952394877682283, guid: de634b1434ef7054b8adea0c563921b0, type: 3}
   - {fileID: 8738622988110265040, guid: c0ba82c1117a8cf4d902d1ff66c3d136, type: 3}
   placementGrid: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!43 &1983914257
 Mesh:
   m_ObjectHideFlags: 0
