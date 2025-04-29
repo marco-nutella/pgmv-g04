@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Cabinet Width="99" Height="99">
-
+<Cabinet Width="3" Height="4">
+    <line>1 2 3 4</line>
+    <line>1 2 3 4</line>
+    <line>1 2 3 4</line>
 </Cabinet>

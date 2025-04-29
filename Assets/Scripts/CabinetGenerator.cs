@@ -1,7 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System;
 using UnityEngine;
+
+public class OutOfBoundsSizeException : Exception
+{
+    public OutOfBoundsSizeException()
+    {
+    }
+
+    public OutOfBoundsSizeException(string message)
+        : base(message)
+    {
+    }
+
+    public OutOfBoundsSizeException(string message, Exception inner)
+        : base(message, inner)
+    {
+    }
+}
 
 public class CabinetGenerator : MonoBehaviour
 {
@@ -59,11 +77,71 @@ public class CabinetGenerator : MonoBehaviour
         return cabinetHeights;
     }
 
-    private void PlaceCabinets(int width, int height) {
+    private Dictionary<string, dynamic> ReadCabinetSettingsFromXml(TextAsset xmlAsset) {
+        XmlDocument cabinetXmlDocument = new XmlDocument();
+        cabinetXmlDocument.LoadXml(xmlAsset.text);
+
+        XmlNode cabinetSettings = cabinetXmlDocument.DocumentElement;
+
+        int width = int.Parse(cabinetSettings.Attributes["Width"].Value);
+        int height = int.Parse(cabinetSettings.Attributes["Height"].Value);
+
+        if (width <= 0 || height <= 0) { // Verificar se os valores são válidos
+            //Debug.LogError("Cabinet width or height are invalid or null. Width: " + width + " Height:" + height);
+            throw new OutOfBoundsSizeException("Cabinet width or height are invalid or null. Width: " + width + " Height:" + height);
+        }
+
+        try {
+            XmlNode firstLine = cabinetXmlDocument.SelectNodes("Cabinet/line")[0];
+            List<int> componentsList = SpacesIdentedXmlStringToIntList(firstLine.InnerText);
+
+            if (componentsList.Count != height) {
+                throw new OutOfBoundsSizeException("Components per cabinet line does not match height. Components per cabinet line: " + componentsList.Count + " Height:" + height);
+            }
+             
+        } catch (Exception e) { // https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/exception-handling-statements
+            Debug.LogException(e, this);
+            throw;
+        }
+
+        Dictionary<string, dynamic> dict = new Dictionary<string, dynamic>();
+        dict.Add("width", width);
+        dict.Add("height", height);
+        dict.Add("xmlDocument", cabinetXmlDocument);
+        return dict;
+    }
+
+    private void PlaceCabinets(int width, int height) { // Metodo overloaded que nao requer o xmlDict, para uso por qualquer motivo
         List<int> cabinetHeights = GetCabinetHeights(width, (float) height);
         int stackedCabinets = cabinetHeights[0];
 
-        transform.position += -transform.right * (4*2); // para fazer o off-set do "ir à direita" inicial
+        transform.position += -transform.right * (4*2);
+        Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
+        for (int j = 0; j < stackedCabinets; j++) { 
+            int currentCabinetHeight = cabinetHeights[j+1];
+            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
+
+           if (j > 0) {
+                transform.position = rowStartingPosition;
+                transform.position += transform.up * (5.4f*2); 
+                rowStartingPosition = transform.position; 
+           }
+
+            for (int i = 0; i < width; i++) { 
+                transform.position += transform.right * (4*2); 
+                cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); 
+            }
+        }
+    }
+
+    private void PlaceCabinets(Dictionary<string, dynamic> xmlDict) {
+        int width = xmlDict["width"];
+        int height = xmlDict["height"];
+
+        List<int> cabinetHeights = GetCabinetHeights(width, (float) height);
+        int stackedCabinets = cabinetHeights[0];
+
+        transform.position += -transform.right * (4*2); // Para fazer o off-set do "ir à direita" inicial (de novo, tenho de mudar isso para nao ser hard-coded...)
         Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
         for (int j = 0; j < stackedCabinets; j++) { // O próprio transform irá mudar de posição e sevirá de "base" para ir botando as cabinetes
             int currentCabinetHeight = cabinetHeights[j+1];
@@ -73,32 +151,58 @@ public class CabinetGenerator : MonoBehaviour
                 //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
                 transform.position = rowStartingPosition;
                 transform.position += transform.up * (5.4f*2); // * j Posicionar de acordo com a altura, hard-coded por agora, mudar
-                rowStartingPosition = transform.position; // possivel bug aqui que faz com que fileiras acima da segunda fiquem muito acima de onde deveriam
+                rowStartingPosition = transform.position; 
            }
 
             for (int i = 0; i < width; i++) { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
                 transform.position += transform.right * (4*2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
                 cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                PlaceComponent(xmlDict["xmlDocument"]);
             }
         }
     }
 
-    private void PlaceComponent() {
-        
-    }
-    public void GenerateCabinet()
-    {
-        XmlNodeList cabinnetSettingsList = ReadXmlFile(XmlReference);
-        XmlNode cabinetSettings = cabinnetSettingsList.Item(0);
+    private List<int> SpacesIdentedXmlStringToIntList(string text) {
+        string[] componentsStringArray = text.Split(' ');
+        List<int> componentsIntList = new List<int>();
 
-        int width = int.Parse(cabinetSettings.Attributes["Width"].Value);
-        int height = int.Parse(cabinetSettings.Attributes["Height"].Value);
-
-        if (width <= 0 || height <= 0) { // Verificar se os valores são válidos
-            Debug.LogError("Cabinet width or height are invalid or null. Width: " + width + " Height:" + height );
+        foreach(string component in componentsStringArray) {
+            componentsIntList.Add(int.Parse(component));
         }
 
-        PlaceCabinets(width, height);
+        return componentsIntList;
+    }
+
+    private void PlaceComponent(XmlDocument xmlDoc) {
+        /*
+            1 - Ler todas as linhas dentro do elemento "Cabinet"
+            2 - Para cada linha, identificar todos os objetos, separados por espaços 
+            3 - Para cada objeto, encontrar a cabinete/armario a qual pertence
+            3.5 - Esse armario vai ser igual a 0 + o numero da linha na lista "cabinets", e + 3 a cada 3 objetos lidos na linha atual (objNº%3)
+            4 - Colocar o objeto na posiçao adequada para seu objNº, no espaço local do armario, como child. Vai ser algum numero representando Y vezes objNº%3
+            5 - Repetir para todos os objetos
+        */
+
+        XmlNodeList linesList = xmlDoc.SelectNodes("Cabinet/line"); // 1
+        for (int i = 0; i < linesList.Count; i++) {
+            XmlNode node = linesList[i];
+            List<int> componentsList = SpacesIdentedXmlStringToIntList(node.InnerText); // 2
+            
+            for (int compIdx = 0; compIdx < componentsList.Count; compIdx++) {
+                int heightModifier = compIdx/3; // 3.5
+                GameObject parentCabinet = cabinets[i+(3*heightModifier)]; // 3
+                
+                
+                
+            }
+            
+        }
+    }
+
+    public void GenerateCabinet()
+    {
+        Dictionary<string, dynamic> cabinetSettingsDict = ReadCabinetSettingsFromXml(XmlReference);
+        PlaceCabinets(cabinetSettingsDict);
 
 
 
