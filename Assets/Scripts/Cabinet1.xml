@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Cabinet Width="3" Height="4">
-    <line>1 2 3 4</line>
-    <line>1 2 3 4</line>
-    <line>1 2 3 4</line>
+<Cabinet Width="3" Height="5">
+    <line>Shelf Drawer Drawer Drawer SquareCabinet</line>
+    <line>SquareCabinet Drawer Shelf SquareCabinet Shelf</line>
+    <line>Drawer SquareCabinet SquareCabinet Drawer Shelf</line>
 </Cabinet>

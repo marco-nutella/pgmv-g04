@@ -46,8 +46,8 @@ public class CabinetGenerator : MonoBehaviour
     [SerializeField]
     private GameObject[] componentPrefabsFromInspector;
     private List<GameObject> cabinets = new List<GameObject>();
-    private List<GameObject> doors;
-    private List<GameObject> components;
+    private List<GameObject> doors = new List<GameObject>();
+    private List<GameObject> components = new List<GameObject>();
 
     private XmlNodeList ReadXmlFile(TextAsset textAsset) {
         cabinetData = new XmlDocument();
@@ -157,6 +157,7 @@ public class CabinetGenerator : MonoBehaviour
            if (j > 0) {
                 //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
                 transform.position = rowStartingPosition;
+                PlaceComponentsForRow(xmlDict["xmlDocument"], rowStartingPosition, j);
                 transform.position += transform.up * (5.4f*2); // * j Posicionar de acordo com a altura, hard-coded por agora, mudar
                 rowStartingPosition = transform.position; 
            }
@@ -164,9 +165,11 @@ public class CabinetGenerator : MonoBehaviour
             for (int i = 0; i < width; i++) { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
                 transform.position += transform.right * (4*2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
                 cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                PlaceComponent(xmlDict["xmlDocument"], transform.position, i);
             }
         }
+
+        transform.position = rowStartingPosition;
+        PlaceComponentsForRow(xmlDict["xmlDocument"], rowStartingPosition, stackedCabinets); // Precisa ser chamado uma última vez
     }
 
     private List<int> SpaceIdentedXmlStringToIndexList(string text) {
@@ -185,7 +188,7 @@ public class CabinetGenerator : MonoBehaviour
         ComponentEnum.TryParse(str, out ComponentEnum result);
         return (int) result;
     }
-    private void PlaceComponent(XmlDocument xmlDoc, Vector3 basePosition, int cabinetIndex) {
+    private void PlaceComponentsForRow(XmlDocument xmlDoc, Vector3 basePosition, int rowHeight) {
         /*
             1 - Ler todas as linhas dentro do elemento "Cabinet"
             2 - Para cada linha, identificar todos os objetos, separados por espaços 
@@ -196,30 +199,35 @@ public class CabinetGenerator : MonoBehaviour
         */
 
         XmlNodeList linesList = xmlDoc.SelectNodes("Cabinet/line"); // 1
-        transform.position += transform.up*0.5f;
-        //for (int line = 0; i < linesList.Count; line++) {
-        XmlNode node = linesList[cabinetIndex];
-        List<int> componentsList = SpaceIdentedXmlStringToIndexList(node.InnerText); // 2
-        
-        for (int component = 0; component < componentsList.Count; component++) {
-            /* int heightModifier = compIdx/3; // 3.5
-            GameObject parentCabinet = cabinets[i+(3*heightModifier)]; // 3*/
-
-            int componentIndex = componentsList[component];
-            GameObject chosenComponent = componentPrefabsFromInspector[componentIndex];
-
-            components.Add(Instantiate(chosenComponent, transform));
-            transform.position += transform.up*1.5f;
-
-
+        transform.position += transform.up*0.275f;
+        transform.position += transform.right * (4*2);
+        for (int line = 0; line < linesList.Count; line++) {
+            XmlNode node = linesList[line];
+            List<int> componentsList = SpaceIdentedXmlStringToIndexList(node.InnerText); // 2
+            Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
             
+            for (int i = 0; i < componentsList.Count; i++) {
+                /* int heightModifier = compIdx/3; // 3.5
+                GameObject parentCabinet = cabinets[i+(3*heightModifier)]; // 3*/
+                int lowerBound = rowHeight == 0 ? 0 : (rowHeight*3)-3; // Inclusivo
+                int upperBound = rowHeight == 0 ? 3 : rowHeight*3; // Exclusivo
+                Debug.Log("Row height: " + rowHeight + "Lower bound: " + lowerBound + "Upper bound: " + upperBound + "Line: " + line + "Row: " + i);
+                if (i >= upperBound || i < lowerBound) {
+                    continue;
+                }
+
+                int componentIndex = componentsList[i];
+                GameObject chosenComponent = componentPrefabsFromInspector[componentIndex];
+
+                components.Add(Instantiate(chosenComponent, transform.position, transform.rotation));
+                transform.position += transform.up*3.166f;
+            }
             
-            
-            
+            transform.position = rowStartingPosition;
+            transform.position += transform.right * (4*2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
         }
-        
+
         transform.position = basePosition;
-        //}
     }
 
     public void GenerateCabinet()
