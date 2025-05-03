@@ -955,7 +955,7 @@ PrefabInstance:
     - target: {fileID: 7333868970618791456, guid: 2eb142ff35d2f944f8d82545eeed3e68, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b9cf96bc7c2e543a1b0e93e521e8c711, type: 2}
+      objectReference: {fileID: 2100000, guid: 9d6e79f7ec8d440748561a73b17f091e, type: 2}
     - target: {fileID: 7437845667295302961, guid: 2eb142ff35d2f944f8d82545eeed3e68, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -12042,7 +12042,7 @@ GameObject:
   - component: {fileID: 1535712406}
   - component: {fileID: 1535712405}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RefletionProbe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15876,7 +15876,7 @@ PrefabInstance:
     - target: {fileID: 7333868970618791456, guid: 2eb142ff35d2f944f8d82545eeed3e68, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b9cf96bc7c2e543a1b0e93e521e8c711, type: 2}
+      objectReference: {fileID: 2100000, guid: 9d6e79f7ec8d440748561a73b17f091e, type: 2}
     - target: {fileID: 7437845667295302961, guid: 2eb142ff35d2f944f8d82545eeed3e68, type: 3}
       propertyPath: m_Mesh
       value: 
