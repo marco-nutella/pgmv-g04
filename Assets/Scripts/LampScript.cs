@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LampScript : MonoBehaviour
+public class LampScript : UtilityScript
 {
     // Start is called before the first frame update
 
@@ -32,19 +32,10 @@ public class LampScript : MonoBehaviour
     void Update()
     {
         // Check for mouse click
-        if (Input.GetMouseButtonDown(0)) // 0 é lado esquerdo do rato
+        if (OnClickActivation(Lamp))
         {
-            // Check if the mouse is over the lamp
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.transform.gameObject == Lamp)
-                {
-                    isLightOn = !isLightOn;
-                    Lamp.SetActive(isLightOn);
-                }
-            }
+            isLightOn = !isLightOn;
+            Lamp.SetActive(isLightOn);
         }
         // if (myLight != null) 
         // {
