@@ -23,7 +23,7 @@ public class UtilityScript : MonoBehaviour
         return false;
     }
 
-    public IEnumerator TweenGameObject(GameObject tweenObject, Vector3 endPosition, float tweenDuration, AnimationCurve? animationCurve, Action<bool>? debounceCallback)  // Adaptado de https://www.youtube.com/watch?v=MyVY-y_jK1I
+    public IEnumerator TweenGameObject(GameObject tweenObject, Vector3 endPosition, float tweenDuration, AnimationCurve? animationCurve, Action<bool>? callback)  // Adaptado de https://www.youtube.com/watch?v=MyVY-y_jK1I
     {
         float elapsedTweenTime = 0f;
         Vector3 startPosition = new Vector3(tweenObject.transform.position.x, tweenObject.transform.position.y, tweenObject.transform.position.z); 
@@ -40,8 +40,8 @@ public class UtilityScript : MonoBehaviour
             yield return null;
         }
 
-        if (debounceCallback != null) { // Adaptado de https://discussions.unity.com/t/is-there-a-way-to-find-out-when-a-coroutine-is-done-executing/209396/3
-            debounceCallback(false);
+        if (callback != null) { // Adaptado de https://discussions.unity.com/t/is-there-a-way-to-find-out-when-a-coroutine-is-done-executing/209396/3
+            callback(false);
         }
     }
 }
