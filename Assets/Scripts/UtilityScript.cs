@@ -44,4 +44,33 @@ public class UtilityScript : MonoBehaviour
             callback(false);
         }
     }
+
+    public IEnumerator TweenGameObject(GameObject tweenObject, Vector3 unfixedStartPosition, Vector3 endPosition, float tweenDuration, AnimationCurve? animationCurve, Action<bool>? callback)  // Adaptado de https://www.youtube.com/watch?v=MyVY-y_jK1I
+    {
+        float elapsedTweenTime = 0f;
+        Vector3 startPosition = new Vector3(unfixedStartPosition.x, unfixedStartPosition.y, unfixedStartPosition.z); 
+
+        while (elapsedTweenTime < tweenDuration) {
+            elapsedTweenTime += Time.deltaTime;
+            float progress = elapsedTweenTime/tweenDuration;
+
+            if (animationCurve != null) {
+                tweenObject.transform.position = Vector3.Lerp(startPosition, endPosition, progress);
+            } else {
+                tweenObject.transform.position = Vector3.Lerp(startPosition, endPosition, animationCurve.Evaluate(progress));
+            }
+            yield return null;
+        }
+
+        if (callback != null) { // Adaptado de https://discussions.unity.com/t/is-there-a-way-to-find-out-when-a-coroutine-is-done-executing/209396/3
+            callback(false);
+        }
+    }
+
+    public void ActivateDescendantLights(GameObject parent, bool enabled) {
+        Light[] lightList = parent.GetComponentsInChildren<Light>();
+        foreach (Light childLight in lightList) {
+            childLight.enabled = enabled ? true : !childLight.enabled;
+        }
+    }
 }

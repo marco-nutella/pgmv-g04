@@ -32,19 +32,23 @@ public class DrawerScript : UtilityScript
             switch (drawerOpen) {
                 case true:
                     endPosition = new Vector3(drawerObject.transform.position.x, drawerObject.transform.position.y, drawerObject.transform.position.z);
-                    endPosition += Vector3.right*-2.005999935f;
+                    endPosition += drawerObject.transform.forward*-2.005999935f;
                     StartCoroutine(TweenGameObject(drawerObject, endPosition, tweenDuration, animationCurve, callbackResult => 
                     {
-                        debounce = false;
+                        debounce = callbackResult;
                     }));
+
+                    ActivateDescendantLights(transform.gameObject, false);
                     break;
                 case false:
                     endPosition = new Vector3(drawerObject.transform.position.x, drawerObject.transform.position.y, drawerObject.transform.position.z); 
-                    endPosition += Vector3.right*2.005999935f;
+                    endPosition += drawerObject.transform.forward*2.005999935f;
                     StartCoroutine(TweenGameObject(drawerObject, endPosition, tweenDuration, animationCurve, callbackResult => 
                     {
-                        debounce = false;
+                        debounce = callbackResult;
                     }));
+
+                    ActivateDescendantLights(transform.gameObject, true);
                     break;
             }
 
