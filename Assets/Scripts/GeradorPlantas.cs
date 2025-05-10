@@ -30,6 +30,7 @@ public class GeradorPlantas : MonoBehaviour
                 };
             }
             plant = expandedTree;
+            Debug.Log("Iteração " + i + ": " + plant);
         }
     }
 
