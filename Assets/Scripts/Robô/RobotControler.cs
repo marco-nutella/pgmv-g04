@@ -8,7 +8,6 @@ public class RobotControler : MonoBehaviour
     [SerializeField] float turn_rate = 300;
     [SerializeField] bool use_physics = true;
     Rigidbody rb;
-    float moveUp = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +25,6 @@ public class RobotControler : MonoBehaviour
     {
         rb.isKinematic = !use_physics;
         rb.useGravity = use_physics;
-
-        
 
         // Verifica se as teclas de subida ou descida estão pressionadas
         if (Input.GetKey(KeyCode.Q))
