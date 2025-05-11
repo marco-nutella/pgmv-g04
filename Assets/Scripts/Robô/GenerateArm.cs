@@ -27,7 +27,7 @@ public class GenerateArm : MonoBehaviour
     private Quaternion targetRotation;
 
     public Transform holdPoint;
-    public float grabRange = 2f;
+    public float grabRange = 1f;
 
     private GameObject heldObject;
     private Collider heldObjectCollider;
