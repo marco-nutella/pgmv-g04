@@ -38,11 +38,6 @@ public class RobotControler : MonoBehaviour
 
         if (!use_physics)
         {
-            //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), moveUp, Input.GetAxis("Vertical"));
-
-            // Aplica o movimento ao jogador
-            //transform.Translate(movement * speed * Time.deltaTime);
-
             transform.Translate(Vector3.forward  * Input.GetAxis("Vertical") * speed * Time.deltaTime, Space.Self);
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * turn_rate * Time.deltaTime, Space.Self);
 

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1539152597997637128}
-  - component: {fileID: 6800396984458492313}
   m_Layer: 0
   m_Name: Ombro (right)
   m_TagString: Untagged
@@ -32,22 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2417764951088424701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6800396984458492313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994320812035372066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb00ceb8396bbab4ba200c7aad9681db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  armPrefab: {fileID: 5431175578834212079, guid: 8f0f4d34326fd6c4889f8cf370a2234c, type: 3}
-  handPrefab: {fileID: 0}
-  isLeft: 0
-  grabKey: 101
 --- !u!1 &1511599085593354606
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4687376460127445941}
-  - component: {fileID: 7545410990353559659}
   m_Layer: 0
   m_Name: Ombro (left)
   m_TagString: Untagged
@@ -80,22 +62,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2417764951088424701}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7545410990353559659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511599085593354606}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb00ceb8396bbab4ba200c7aad9681db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  armPrefab: {fileID: 5431175578834212079, guid: 8f0f4d34326fd6c4889f8cf370a2234c, type: 3}
-  handPrefab: {fileID: 0}
-  isLeft: 0
-  grabKey: 101
 --- !u!1 &1778613232216171412
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +232,7 @@ GameObject:
   - component: {fileID: 2916997280912666222}
   - component: {fileID: 8065692763969612888}
   - component: {fileID: 8572232922486619012}
-  - component: {fileID: 3504580751535029547}
+  - component: {fileID: 6071587551928678604}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -358,7 +324,7 @@ MonoBehaviour:
   speed: 5
   turn_rate: 300
   use_physics: 0
---- !u!114 &3504580751535029547
+--- !u!114 &6071587551928678604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,12 +333,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7533195722172807422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f133d86d10f903f4da3b609993c8fa79, type: 3}
+  m_Script: {fileID: 11500000, guid: 840c82ca767aae54aabb9d46df99461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  armPrefab: {fileID: 0}
+  handPrefab: {fileID: 0}
+  leftShoulderPoint: {fileID: 1511599085593354606}
+  rightShoulderPoint: {fileID: 994320812035372066}
+  grabKey: 101
   holdPoint: {fileID: 4080084990684135561}
   grabRange: 2
-  grabKey: 101
 --- !u!1 &8821090446563153909
 GameObject:
   m_ObjectHideFlags: 0

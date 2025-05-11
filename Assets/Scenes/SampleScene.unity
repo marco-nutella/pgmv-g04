@@ -7660,7 +7660,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -7687,7 +7687,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: 11.4, z: 2.92}
+  m_LocalPosition: {x: 9, y: 8.575, z: 17.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8435,6 +8435,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3504580751535029547, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071587551928678604, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: armPrefab
+      value: 
+      objectReference: {fileID: 5431175578834212079, guid: 8f0f4d34326fd6c4889f8cf370a2234c, type: 3}
+    - target: {fileID: 6071587551928678604, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: handPrefab
+      value: 
+      objectReference: {fileID: 3886795994304001567, guid: 5fa3fedb506ee244ea8ecab920412a85, type: 3}
+    - target: {fileID: 6800396984458492313, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800396984458492313, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: catchPoint
+      value: 
+      objectReference: {fileID: 1911588251}
     - target: {fileID: 6800396984458492313, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: handPrefab
       value: 
@@ -8449,13 +8469,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7545410990353559659, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7545410990353559659, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: catchPoint
+      value: 
+      objectReference: {fileID: 1911588251}
     - target: {fileID: 7545410990353559659, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: handPrefab
       value: 
       objectReference: {fileID: 3886795994304001567, guid: 5fa3fedb506ee244ea8ecab920412a85, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 8065692763969612888, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7545410990353559659, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+    - {fileID: 6800396984458492313, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2417764951088424701, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
@@ -15290,6 +15320,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2182931996251911599, guid: 2eb142ff35d2f944f8d82545eeed3e68, type: 3}
   m_PrefabInstance: {fileID: 1839065722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1911588251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1778613232216171412, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+  m_PrefabInstance: {fileID: 1122209169}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &1913112904
 Mesh:
