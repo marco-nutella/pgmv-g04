@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines; // falta ver vers\ao splines - tem de ser 2.7.2 ou superior
 using UnityEngine.UIElements;
 
 public class GeradorPlantas : MonoBehaviour
@@ -73,7 +74,10 @@ public class GeradorPlantas : MonoBehaviour
                 case 'B':
                     break;
                 case '[':
-                    stack.Push(gameObject.AddComponent<TransformInfo>());
+                    stack.Push(new TransformInfo(){ // new dá warning, mas está a funcionar
+                        position = transform.position,
+                        rotation = transform.rotation
+                    });
                     break;
                 case ']':
                     TransformInfo helper = stack.Pop();
