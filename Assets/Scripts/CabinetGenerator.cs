@@ -99,16 +99,11 @@ public class CabinetGenerator : MonoBehaviour
         }
 
         try {
-            XmlNodeList componentnodes = cabinetXmlDocument.SelectNodes("Cabinet/line");
-            XmlNode firstLine = componentnodes[0];
+            XmlNode firstLine = cabinetXmlDocument.SelectNodes("Cabinet/line")[0];
             List<int> componentsList = SpaceIdentedXmlStringToIndexList(firstLine.InnerText);
 
             if (componentsList.Count != height) {
                 throw new OutOfBoundsSizeException("Components per cabinet line does not match height. Components per cabinet line: " + componentsList.Count + " Height:" + height);
-            }
-
-            if (componentnodes.Count != width) {
-                throw new OutOfBoundsSizeException("Total amount of component lines does not match cabinet width. Total component lines: " + componentsList.Count + " Width:" + height);
             }
              
         } catch (Exception e) { // https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/exception-handling-statements
@@ -216,7 +211,7 @@ public class CabinetGenerator : MonoBehaviour
                 GameObject parentCabinet = cabinets[i+(3*heightModifier)]; // 3*/
                 int lowerBound = rowHeight == 0 ? 0 : (rowHeight*3)-3; // Inclusivo
                 int upperBound = rowHeight == 0 ? 3 : rowHeight*3; // Exclusivo
-                //Debug.Log("Row height: " + rowHeight + "Lower bound: " + lowerBound + "Upper bound: " + upperBound + "Line: " + line + "Row: " + i);
+                Debug.Log("Row height: " + rowHeight + "Lower bound: " + lowerBound + "Upper bound: " + upperBound + "Line: " + line + "Row: " + i);
                 if (i >= upperBound || i < lowerBound) {
                     continue;
                 }
