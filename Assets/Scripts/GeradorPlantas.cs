@@ -14,9 +14,11 @@ public class GeradorPlantas : MonoBehaviour
 
     [SerializeField] private int iterations;
     Stack<TransformInfo> stack = new Stack<TransformInfo>();
+    Stack<int> splineIndexStack = new Stack<int>();
     private TransformInfo helper;
     [SerializeField] private float length;
     [SerializeField] private float angle;
+    [SerializeField] private Material PlantMaterial;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
     void Start()
@@ -62,14 +64,30 @@ public class GeradorPlantas : MonoBehaviour
     }
     void CreateMesh(){
         Vector3 initialPosition; 
+        GameObject plantObject = new GameObject("Plant");
+        var meshFilter = plantObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = new Mesh();
+        var meshRenderer = plantObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = PlantMaterial;
+
+        var container = plantObject.AddComponent<SplineContainer>();
+        container.RemoveSplineAt(0);
+        var extrude = plantObject.AddComponent<SplineExtrude>(); // Add SplineExtrude component
+        extrude.Container = container;
+
+        var currentSpline = container.AddSpline();
+        var splineIndex = container.Splines.FindIndex(currentSpline);
+
+        currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
+
         foreach(char j in plant){
             switch(j){
                 case 'F':
-                    initialPosition = transform.position;
+                    // initialPosition = transform.position;
                     transform.Translate(Vector3.up*length);
-                    LineList.Add(new List<Vector3>(){initialPosition, transform.position});
-                    initialPosition = transform.position;
-
+                    // LineList.Add(new List<Vector3>(){initialPosition, transform.position});
+                    // initialPosition = transform.position;
+                    currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
                     break;
                 case 'B':
                     break;
@@ -78,11 +96,23 @@ public class GeradorPlantas : MonoBehaviour
                         position = transform.position,
                         rotation = transform.rotation
                     });
+                    splineIndexStack.Push(splineIndex);
+                    // Ligar a duas splines
+                    int splineCount = currentSpline.Count;
+                    int prevSplineIndex = splineIndex;
+                    currentSpline = container.AddSpline();
+                    splineIndex = container.Splines.FindIndex(currentSpline);
+
+                    currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
+                    container.LinkKnots(new SplineKnotIndex(prevSplineIndex, splineCount - 1), new SplineKnotIndex(splineIndex, 0));
+
                     break;
                 case ']':
                     TransformInfo helper = stack.Pop();
                     transform.position = helper.position;
                     transform.rotation = helper.rotation;
+                    splineIndex = splineIndexStack.Pop();
+                    currentSpline = container.Splines[splineIndex];
                     break;
                 case 'l':
                     transform.Rotate(Vector3.back, angle);
@@ -93,5 +123,19 @@ public class GeradorPlantas : MonoBehaviour
 
             }
         }
+    }
+}
+public static class PlantGeradorExtension
+{
+    public static int FindIndex(this IReadOnlyList<Spline> splines, Spline spline)
+    {
+        for (int i = 0; i < splines.Count; i++)
+        {
+            if (splines[i] == spline)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }
