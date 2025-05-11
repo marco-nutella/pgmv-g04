@@ -17,7 +17,10 @@ public class GeradorPlantas : MonoBehaviour
     Stack<int> splineIndexStack = new Stack<int>();
     private TransformInfo helper;
     [SerializeField] private float length;
-    [SerializeField] private float angle;
+    [SerializeField] private float angleMin;
+    [SerializeField] private float angleMax;
+    [SerializeField] private float angleYMin;
+    [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
@@ -40,12 +43,30 @@ public class GeradorPlantas : MonoBehaviour
         for(int i=0; i<iterations; i++){
             expandedTree = "";
             foreach(char j in plant){
-                expandedTree += j switch
+                switch(j)
                 {
-                    'F' => "FF",
-                    'B' => "[lFB][rFB]",
-                    _ => j.ToString()
-                };
+                    case 'F':
+                        if (Random.Range(0f,100f) < 50f){
+                            expandedTree += "F";
+                        }
+                        else
+                        {
+                            expandedTree += "FF";
+                        }
+                        break;
+                    case 'B':
+                        if(Random.Range(0f, 100f) < 50f){
+                            expandedTree += "[llFB][rFB]";
+                        }
+                        else
+                        {
+                            expandedTree += "[lFB][rrFB]";
+                        }
+                        break;
+                    default:
+                        expandedTree += j.ToString();
+                        break;
+                }
             }
             plant = expandedTree;
             Debug.Log("Iteração " + i + ": " + plant);
@@ -115,10 +136,12 @@ public class GeradorPlantas : MonoBehaviour
                     currentSpline = container.Splines[splineIndex];
                     break;
                 case 'l':
-                    transform.Rotate(Vector3.back, angle);
+                    transform.Rotate(Vector3.back, Random.Range(angleMin, angleMax));
+                    transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
                 case 'r':
-                    transform.Rotate(Vector3.forward, angle);
+                    transform.Rotate(Vector3.forward, Random.Range(angleMin, angleMax));
+                    transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
 
             }

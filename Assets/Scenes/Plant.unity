@@ -447,7 +447,10 @@ MonoBehaviour:
   axiom: FB
   iterations: 4
   length: 1
-  angle: 20
+  angleMin: 10
+  angleMax: 15
+  angleYMin: 0
+  angleYMax: 0
   PlantMaterial: {fileID: 2100000, guid: eebc1b492cc544154b43f5bfbf1be68c, type: 2}
 --- !u!4 &1704682995
 Transform:
@@ -483,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1840915148
 MonoBehaviour:
   m_ObjectHideFlags: 0
