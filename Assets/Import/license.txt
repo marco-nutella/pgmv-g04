@@ -1,0 +1,11 @@
+Model Information:
+* title:	Industrial Table
+* source:	https://sketchfab.com/3d-models/industrial-table-4f84abad3e0a4e70b9f6a06585444223
+* author:	Tauffiq Abdllah (https://sketchfab.com/Muhammad.Tauffiq.Abdllah)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Industrial Table" (https://sketchfab.com/3d-models/industrial-table-4f84abad3e0a4e70b9f6a06585444223) by Tauffiq Abdllah (https://sketchfab.com/Muhammad.Tauffiq.Abdllah) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
