@@ -5,14 +5,17 @@ using UnityEngine;
 public class Grower : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public void Generated(int i )
     {
         this.transform.position += Vector3.up;
     }
+    // {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // }
+
+    // // Update is called once per frame
+    // void Update()
+    // {
+
+    // }
 }
