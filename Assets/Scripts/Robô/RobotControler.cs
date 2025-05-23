@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RobotControler : MonoBehaviour
@@ -19,12 +17,20 @@ public class RobotControler : MonoBehaviour
 
     void Update()
     {
-        float oscillation = Mathf.Sin(Time.time * oscillationFrequency) * oscillationAmplitude/1000;
-        Vector3 oscillationOffset = new Vector3(0, oscillation, 0);        
-        transform.position += oscillationOffset;
+        float oscillation = Mathf.Sin(Time.time * oscillationFrequency) * oscillationAmplitude / 1000;
+        Vector3 oscillationOffset = new Vector3(0, oscillation, 0);
+
+        if (!use_physics)
+        {
+            transform.position += oscillationOffset;
+        }
+        else
+        {
+            rb.MovePosition(rb.position + oscillationOffset);
+        }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         rb.isKinematic = !use_physics;
         rb.useGravity = use_physics;
@@ -50,6 +56,15 @@ public class RobotControler : MonoBehaviour
         if (transform.position.y < -5)
         {
             transform.position = Vector3.zero;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Colidiu com a parede!");
+            // Aqui você pode parar o robô, tocar um som ou reverter movimento
         }
     }
 }

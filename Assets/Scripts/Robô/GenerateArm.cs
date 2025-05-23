@@ -7,7 +7,6 @@ public class GenerateArm : MonoBehaviour
 {
     [SerializeField] GameObject armPrefab;
     [SerializeField] GameObject handPrefab;
-
     [SerializeField] GameObject leftShoulderPoint;
     [SerializeField] GameObject rightShoulderPoint;
 
@@ -26,7 +25,7 @@ public class GenerateArm : MonoBehaviour
     private Quaternion originalRotationRightShoulder;
     private Quaternion targetRotation;
 
-    public Transform holdPoint;
+    [SerializeField] Transform holdPoint;
     public float grabRange = 1f;
 
     private GameObject heldObject;
@@ -60,8 +59,8 @@ public class GenerateArm : MonoBehaviour
     }
 
     void TryGrabObject()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, grabRange);
+    {        
+        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
 
         foreach (var col in colliders)
         {
