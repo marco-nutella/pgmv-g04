@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RecursiveBundle : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     public int Index { get; set; }
-    public RecursiveInstantiator Parent { get; set; }
+    public RecursiveInstaciator Parent { get; set; }
 }
