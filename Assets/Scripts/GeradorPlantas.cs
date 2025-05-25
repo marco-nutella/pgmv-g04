@@ -38,40 +38,40 @@ public class GeradorPlantas : MonoBehaviour
         }
     }
 
-    // void ExpandTreeString(){
-    //     string expandedTree;
-    //     for(int i=0; i<iterations; i++){
-    //         expandedTree = "";
-    //         foreach(char j in plant){
-    //             switch(j)
-    //             {
-    //                 case 'F':
-    //                     if (Random.Range(0f,100f) < 50f){
-    //                         expandedTree += "F";
-    //                     }
-    //                     else
-    //                     {
-    //                         expandedTree += "FF";
-    //                     }
-    //                     break;
-    //                 case 'B':
-    //                     if(Random.Range(0f, 100f) < 50f){
-    //                         expandedTree += "[llFB][rFB]";
-    //                     }
-    //                     else
-    //                     {
-    //                         expandedTree += "[lFB][rrFB]";
-    //                     }
-    //                     break;
-    //                 default:
-    //                     expandedTree += j.ToString();
-    //                     break;
-    //             }
-    //         }
-    //         plant = expandedTree;
-    //         Debug.Log("Iteração " + i + ": " + plant);
-    //     }
-    // }
+    /*void ExpandTreeString(){
+        string expandedTree;
+        for(int i=0; i<iterations; i++){
+            expandedTree = "";
+            foreach(char j in plant){
+                switch(j)
+                {
+                    case 'F':
+                        if (Random.Range(0f,100f) < 50f){
+                            expandedTree += "F";
+                        }
+                        else
+                        {
+                            expandedTree += "FF";
+                        }
+                        break;
+                    case 'B':
+                        if(Random.Range(0f, 100f) < 50f){
+                            expandedTree += "[llFB][rFB]";
+                        }
+                        else
+                        {
+                            expandedTree += "[lFB][rrFB]";
+                        }
+                        break;
+                    default:
+                        expandedTree += j.ToString();
+                        break;
+                }
+            }
+            plant = expandedTree;
+            Debug.Log("Iteração " + i + ": " + plant);
+        }
+    }*/
     void ExpandTreeString() {
     string expandedTree;
     for (int i = 0; i < iterations; i++) {
@@ -83,7 +83,7 @@ public class GeradorPlantas : MonoBehaviour
                     if (Random.Range(0f, 100f) < 50f) {
                         expandedTree += "F";
                     } else {
-                        expandedTree += "F[+F][-F]";
+                        expandedTree += "F[+rF][-lF]";
                     }
                     break;
 
@@ -105,9 +105,9 @@ public class GeradorPlantas : MonoBehaviour
                 case 'B':
                     // Exemplo de ramificação com lógica estocástica
                     if (Random.Range(0f, 100f) < 50f) {
-                        expandedTree += "[+F][-F]";
+                        expandedTree += "[++uFFB][-rFB]";
                     } else {
-                        expandedTree += "[+F][--F]";
+                        expandedTree += "[+uFFB][--dlFFB]";
                     }
                 
                     break;
@@ -186,12 +186,28 @@ public class GeradorPlantas : MonoBehaviour
                     splineIndex = splineIndexStack.Pop();
                     currentSpline = container.Splines[splineIndex];
                     break;
-                case 'l':
+                case '+':
                     transform.Rotate(Vector3.back, Random.Range(angleMin, angleMax));
                     // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
-                case 'r':
+                case '-':
                     transform.Rotate(Vector3.forward, Random.Range(angleMin, angleMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    break;
+                case 'u':
+                    transform.Rotate(Vector3.up, Random.Range(angleMin, angleMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    break;
+                case 'd':
+                    transform.Rotate(Vector3.down, Random.Range(angleMin, angleMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    break;
+                case 'l':
+                    transform.Rotate(Vector3.left, Random.Range(angleMin, angleMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    break;
+                case 'r':
+                    transform.Rotate(Vector3.right, Random.Range(angleMin, angleMax));
                     // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
 
