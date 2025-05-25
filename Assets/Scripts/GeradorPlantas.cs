@@ -102,6 +102,26 @@ public class GeradorPlantas : MonoBehaviour
                     expandedTree += "-";
                     break;
 
+                 case 'u':
+                    // +: rotaciona no sentido horário
+                    expandedTree += "u";
+                    break;
+
+                case 'd':
+                    // -: rotaciona no sentido anti-horário
+                    expandedTree += "d";
+                    break;
+
+                 case 'l':
+                    // +: rotaciona no sentido horário
+                    expandedTree += "l";
+                    break;
+
+                case 'r':
+                    // -: rotaciona no sentido anti-horário
+                    expandedTree += "r";
+                    break;
+
                 case 'B':
                     // Exemplo de ramificação com lógica estocástica
                     if (Random.Range(0f, 100f) < 50f) {
@@ -154,6 +174,7 @@ public class GeradorPlantas : MonoBehaviour
         container.RemoveSplineAt(0);
         var extrude = plantObject.AddComponent<SplineExtrude>(); // Add SplineExtrude component
         extrude.Container = container;
+        extrude.Radius = 0.05f;
 
         var currentSpline = container.AddSpline();
         var splineIndex = container.Splines.FindIndex(currentSpline);
