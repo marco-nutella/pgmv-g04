@@ -109,7 +109,15 @@ public class GeradorPlantas : MonoBehaviour
                     } else {
                         expandedTree += "[+F][--F]";
                     }
-                
+                    break;
+                case '[':
+                    // [: salva estado - mantém
+                    expandedTree += "[";
+                    break;
+
+                case ']':
+                    // ]: restaura estado - mantém
+                    expandedTree += "]";    
                     break;
 
                 default:
