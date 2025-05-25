@@ -19,8 +19,8 @@ public class GeradorPlantas : MonoBehaviour
     [SerializeField] private float length;
     [SerializeField] private float angleMin;
     [SerializeField] private float angleMax;
-    [SerializeField] private float angleYMin;
-    [SerializeField] private float angleYMax;
+    // [SerializeField] private float angleYMin;
+    // [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
@@ -38,40 +38,91 @@ public class GeradorPlantas : MonoBehaviour
         }
     }
 
-    void ExpandTreeString(){
-        string expandedTree;
-        for(int i=0; i<iterations; i++){
-            expandedTree = "";
-            foreach(char j in plant){
-                switch(j)
-                {
-                    case 'F':
-                        if (Random.Range(0f,100f) < 50f){
-                            expandedTree += "F";
-                        }
-                        else
-                        {
-                            expandedTree += "FF";
-                        }
-                        break;
-                    case 'B':
-                        if(Random.Range(0f, 100f) < 50f){
-                            expandedTree += "[llFB][rFB]";
-                        }
-                        else
-                        {
-                            expandedTree += "[lFB][rrFB]";
-                        }
-                        break;
-                    default:
-                        expandedTree += j.ToString();
-                        break;
-                }
+    // void ExpandTreeString(){
+    //     string expandedTree;
+    //     for(int i=0; i<iterations; i++){
+    //         expandedTree = "";
+    //         foreach(char j in plant){
+    //             switch(j)
+    //             {
+    //                 case 'F':
+    //                     if (Random.Range(0f,100f) < 50f){
+    //                         expandedTree += "F";
+    //                     }
+    //                     else
+    //                     {
+    //                         expandedTree += "FF";
+    //                     }
+    //                     break;
+    //                 case 'B':
+    //                     if(Random.Range(0f, 100f) < 50f){
+    //                         expandedTree += "[llFB][rFB]";
+    //                     }
+    //                     else
+    //                     {
+    //                         expandedTree += "[lFB][rrFB]";
+    //                     }
+    //                     break;
+    //                 default:
+    //                     expandedTree += j.ToString();
+    //                     break;
+    //             }
+    //         }
+    //         plant = expandedTree;
+    //         Debug.Log("Iteração " + i + ": " + plant);
+    //     }
+    // }
+    void ExpandTreeString() {
+    string expandedTree;
+    for (int i = 0; i < iterations; i++) {
+        expandedTree = "";
+        foreach (char j in plant) {
+            switch (j) {
+                case 'F':
+                    // F: move e desenha, com chance de bifurcar
+                    if (Random.Range(0f, 100f) < 50f) {
+                        expandedTree += "F";
+                    } else {
+                        expandedTree += "F[+F][-F]";
+                    }
+                    break;
+
+                case 'f':
+                    // f: move sem desenhar, mantém a direção
+                    expandedTree += "f";
+                    break;
+
+                case '+':
+                    // +: rotaciona no sentido horário
+                    expandedTree += "+";
+                    break;
+
+                case '-':
+                    // -: rotaciona no sentido anti-horário
+                    expandedTree += "-";
+                    break;
+
+                case 'B':
+                    // Exemplo de ramificação com lógica estocástica
+                    if (Random.Range(0f, 100f) < 50f) {
+                        expandedTree += "[+F][-F]";
+                    } else {
+                        expandedTree += "[+F][--F]";
+                    }
+                
+                    break;
+
+                default:
+                    // Qualquer outro caractere permanece igual
+                    expandedTree += j.ToString();
+                    break;
             }
-            plant = expandedTree;
-            Debug.Log("Iteração " + i + ": " + plant);
         }
+        plant = expandedTree;
+        Debug.Log("Iteração " + i + ": " + plant);
     }
+}
+
 
     // Update is called once per frame
     void Update()
@@ -137,11 +188,11 @@ public class GeradorPlantas : MonoBehaviour
                     break;
                 case 'l':
                     transform.Rotate(Vector3.back, Random.Range(angleMin, angleMax));
-                    transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
                 case 'r':
                     transform.Rotate(Vector3.forward, Random.Range(angleMin, angleMax));
-                    transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
+                    // transform.Rotate(Vector3.up, Random.Range(angleYMin, angleYMax));
                     break;
 
             }
