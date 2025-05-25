@@ -20,6 +20,7 @@ public class RecursiveInstaciator : MonoBehaviour
                 var copy = Instantiate(gameObject);
                 var recursive = copy.GetComponent<RecursiveInstaciator>();
                 recursive.SendMessage("Generated", i);
+                //recursive.SendMessage("Generated", new RecursiveBundle() { Index = i, Parent = this });
             }
         }
     }

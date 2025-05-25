@@ -5,9 +5,10 @@ using UnityEngine;
 public class Grower : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void Generated(int i )
+    // public void Generated(RecursiveBundle bundle)
+    public void Generated(int index)
     {
-        this.transform.position += Vector3.up;
+        this.transform.position += this.transform.up * this.transform.localScale.y;
     }
     // {
 
