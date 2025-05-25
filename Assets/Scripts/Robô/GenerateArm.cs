@@ -145,7 +145,9 @@ public class GenerateArm : MonoBehaviour
         leftArm.transform.SetParent(leftShoulder.transform);
         leftHand.transform.SetParent(leftArm.transform);
         
-        leftShoulder.transform.position = leftShoulderPoint.transform.parent.position + new Vector3(-0.7f, 1.5f, 0);
+        leftShoulder.transform.position = leftShoulderPoint.transform.parent.position + new Vector3(-0.7f, 0, 0);
+
+        //new Vector3(-0.7f, 1.5f, 0);
         leftShoulder.transform.rotation = Quaternion.Euler(0, 0, -30);
             
         leftArm.transform.position = leftShoulder.transform.position + new Vector3(-0.5f, -0.9f, 0);
@@ -162,7 +164,8 @@ public class GenerateArm : MonoBehaviour
         rightArm.transform.SetParent(rightShoulder.transform);
         rightHand.transform.SetParent(rightArm.transform);
 
-        rightShoulder.transform.position = rightShoulderPoint.transform.parent.position + new Vector3(0.7f, 1.5f, 0);
+        rightShoulder.transform.position = rightShoulderPoint.transform.parent.position + new Vector3(0.7f, 0, 0);
+        //new Vector3(0.7f, 1.5f, 0);
         rightShoulder.transform.rotation = Quaternion.Euler(0, 0, 30);
 
         rightArm.transform.position = rightShoulder.transform.position + new Vector3(0.5f, -0.9f, 0);
