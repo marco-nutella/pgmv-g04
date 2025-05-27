@@ -3884,7 +3884,7 @@ GameObject:
   - component: {fileID: 408214458}
   - component: {fileID: 408214457}
   - component: {fileID: 408214456}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6173,6 +6173,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 994320812035372066, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511599085593354606, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778613232216171412, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833441990788400166, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2417764951088424701, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -6254,6 +6270,10 @@ PrefabInstance:
       value: Robot
       objectReference: {fileID: 0}
     - target: {fileID: 7533195722172807422, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533195722172807422, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -6284,6 +6304,14 @@ PrefabInstance:
     - target: {fileID: 8572232922486619012, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: oscillationAmplitude
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821090446563153909, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095546351113571201, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7545410990353559659, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
@@ -9346,7 +9374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963786000}
   - component: {fileID: 963785999}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18226,7 +18254,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 59.21887, y: 130.34773, z: 80.5502}
+  m_Size: {x: 54.12906, y: 122.4346, z: 30.0365}
   m_Center: {x: -1.4312726, y: 53.07405, z: 3.2584522}
 --- !u!114 &2101017353
 MonoBehaviour:
