@@ -41,6 +41,7 @@ public class CabinetGenerator : MonoBehaviour
     [3] = tall;
     }
     */
+    [SerializeField]
     private GameObject[] doorPrefabsFromInspector;
 
     [SerializeField]
@@ -129,19 +130,24 @@ public class CabinetGenerator : MonoBehaviour
 
         transform.position += -transform.right * (4*2);
         Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
-        for (int j = 0; j < stackedCabinets; j++) { 
-            int currentCabinetHeight = cabinetHeights[j+1];
-            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
+        PlaceDoorsOnCabinet(width, height, rowStartingPosition);
+        
+        for (int j = 0; j < stackedCabinets; j++)
+        {
+            int currentCabinetHeight = cabinetHeights[j + 1];
+            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight - 1];
 
-           if (j > 0) {
+            if (j > 0)
+            {
                 transform.position = rowStartingPosition;
-                transform.position += transform.up * (5.4f*2); 
-                rowStartingPosition = transform.position; 
-           }
+                transform.position += transform.up * (5.4f * 2);
+                rowStartingPosition = transform.position;
+            }
 
-            for (int i = 0; i < width; i++) { 
-                transform.position += transform.right * (4*2); 
-                cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); 
+            for (int i = 0; i < width; i++)
+            {
+                transform.position += transform.right * (4 * 2);
+                cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation));
             }
         }
     }
@@ -153,22 +159,27 @@ public class CabinetGenerator : MonoBehaviour
         List<int> cabinetHeights = GetCabinetHeights(width, (float) height);
         int stackedCabinets = cabinetHeights[0];
 
-        transform.position += -transform.right * (4*2); // Para fazer o off-set do "ir à direita" inicial (de novo, tenho de mudar isso para nao ser hard-coded...)
-        Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z); 
-        for (int j = 0; j < stackedCabinets; j++) { // O próprio transform irá mudar de posição e sevirá de "base" para ir botando as cabinetes
-            int currentCabinetHeight = cabinetHeights[j+1];
-            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight-1];
+        transform.position += -transform.right * (4*2); // Para fazer o off-set do "ir à esquerda" inicial (de novo, tenho de mudar isso para não ser hard-coded...)
+        Vector3 rowStartingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        PlaceDoorsOnCabinet(width, height, rowStartingPosition);
 
-           if (j > 0) {
+        for (int j = 0; j < stackedCabinets; j++)
+        { // O próprio transform irá mudar de posição e sevirá de "base" para ir botando as cabinetes
+            int currentCabinetHeight = cabinetHeights[j + 1];
+            GameObject chosenCabinet = cabinetPrefabsFromInspector[currentCabinetHeight - 1];
+
+            if (j > 0)
+            {
                 //transform.position = cabinets[-width+(width*j)].transform.position; // 0 quando para a primeira stack (primeiro armário), width para a segunda stack (primeiro armário da segunda fileira), etc
                 transform.position = rowStartingPosition;
                 PlaceComponentsForRow(xmlDict["xmlDocument"], rowStartingPosition, j);
-                transform.position += transform.up * (5.4f*2); // * j Posicionar de acordo com a altura, hard-coded por agora, mudar
-                rowStartingPosition = transform.position; 
-           }
+                transform.position += transform.up * (5.4f * 2); // * j Posicionar de acordo com a altura, hard-coded por agora, mudar
+                rowStartingPosition = transform.position;
+            }
 
-            for (int i = 0; i < width; i++) { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
-                transform.position += transform.right * (4*2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
+            for (int i = 0; i < width; i++)
+            { // Indexado por 1 para ignorar o primeiro item do array, que é a quantidade de cabinetes empilhadas
+                transform.position += transform.right * (4 * 2); // Posicionar de acordo com a largura, hard-coded por agora, mudar
                 cabinets.Add(Instantiate(chosenCabinet, transform.position, transform.rotation)); // + new Vector3(transform.position.x, transform.position.y, transform.position.z)
             }
         }
@@ -205,7 +216,7 @@ public class CabinetGenerator : MonoBehaviour
 
         XmlNodeList linesList = xmlDoc.SelectNodes("Cabinet/line"); // 1
         transform.position += transform.up*0.275f;
-        transform.position += transform.right * (4*2);
+        transform.position += transform.right * (4*2); // Aqui iteramos pela direita
         for (int line = 0; line < linesList.Count; line++) {
             XmlNode node = linesList[line];
             List<int> componentsList = SpaceIdentedXmlStringToIndexList(node.InnerText); // 2
@@ -233,6 +244,29 @@ public class CabinetGenerator : MonoBehaviour
         }
 
         transform.position = basePosition;
+    }
+
+    private void PlaceDoorsOnCabinet(int width, int height, Vector3 startingPosition)
+    {
+        Vector3 endPosition = startingPosition - transform.right * (4*2) * width;
+        Vector3 positionDistanceVector = endPosition - startingPosition;
+        float worldUnitsWidth = positionDistanceVector.magnitude;
+
+        Vector3 leftStartingPosition = startingPosition + transform.right * ((3*worldUnitsWidth/4) + 4); // Fazemos um offset de 4 para ajustar a posição.
+        leftStartingPosition += transform.forward * 0.25f;
+        Vector3 rightStartingPosition = startingPosition + transform.right * ((worldUnitsWidth/4) + 4);
+
+        GameObject leftDoor = Instantiate(doorPrefabsFromInspector[0], leftStartingPosition, transform.rotation);
+        GameObject rightDoor = Instantiate(doorPrefabsFromInspector[1], rightStartingPosition, transform.rotation);
+        doors.Add(leftDoor);
+        doors.Add(rightDoor);
+
+        float yScale = leftDoor.transform.localScale.y * height / 2; // Ambas as portas tem as dimensões 1x1 relativamente aos armários
+        float xScale = leftDoor.transform.localScale.x * width / 2;
+        Vector3 newScale = new Vector3(xScale, yScale, leftDoor.transform.localScale.z);
+
+        leftDoor.transform.localScale = newScale;
+        rightDoor.transform.localScale = newScale;
     }
 
     public void GenerateCabinet()

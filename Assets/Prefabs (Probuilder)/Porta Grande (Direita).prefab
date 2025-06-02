@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7739284306398079979}
   - component: {fileID: 4143493368793145558}
   - component: {fileID: 6349248784744283002}
+  - component: {fileID: 1685333338296994256}
+  - component: {fileID: 3487594177528197346}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -29,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 2363206860368892405}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 5.75, z: 4}
+  m_LocalPosition: {x: -2, y: -0.375, z: 1.8}
+  m_LocalScale: {x: 0.125, y: 5.75, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2291212556000872137}
@@ -325,6 +327,65 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1685333338296994256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363206860368892405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6cf140613bbdc408ca372f5c330be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  moveDistance: 8
+  abreParaEsquerda: 0
+--- !u!65 &3487594177528197346
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363206860368892405}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 0.99999994, z: 1.0000002}
+  m_Center: {x: 0.5000001, y: 0.49999997, z: 0.5000001}
 --- !u!1 &2998658783679433394
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,8 +726,8 @@ Transform:
   m_GameObject: {fileID: 5777530775564924736}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.20999955, y: 0.5314782, z: 0.71075004}
-  m_LocalScale: {x: 0.17391308, y: 0.25, z: 2}
+  m_LocalPosition: {x: 0.21, y: 0.531, z: -0.055}
+  m_LocalScale: {x: 0.17391308, y: 0.25, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5211736606000735638}
@@ -685,7 +746,7 @@ GameObject:
   - component: {fileID: 4675673402261297581}
   - component: {fileID: 8740161290340724291}
   m_Layer: 0
-  m_Name: Porta Grande
+  m_Name: Porta Grande (Direita)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,8 +762,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 2, y: 1.32, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4305255745638175359}
   m_Father: {fileID: 0}
@@ -724,7 +785,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
