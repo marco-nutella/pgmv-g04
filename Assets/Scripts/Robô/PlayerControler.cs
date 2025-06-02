@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //if (FindObjectOfType<GenerateArm>().isMovingArms) return;
+
         float moveX = Input.GetAxis("Horizontal"); // esquerda/direita (gira)
         float moveZ = Input.GetAxis("Vertical");   // frente/trás (move)
 

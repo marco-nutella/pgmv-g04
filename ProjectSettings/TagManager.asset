@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planta
   - Wall
+  - PontoAgarrar
   layers:
   - Default
   - TransparentFX
