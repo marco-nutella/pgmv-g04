@@ -11,6 +11,7 @@ public class GeradorPlantas : MonoBehaviour
     // Start is called before the first frame update
     private string plant;
     [SerializeField] private string axiom;
+    [SerializeField] private string second_axiom;
 
     [SerializeField] private int iterations;
     Stack<TransformInfo> stack = new Stack<TransformInfo>();
@@ -26,7 +27,8 @@ public class GeradorPlantas : MonoBehaviour
 
     void Start()
     {
-        plant = axiom;
+        plant = Random.value < 0.5f ? axiom : second_axiom;
+        //plant = axiom;
         Debug.Log("Iniciando o Gerador de Plantas" + plant);
         ExpandTreeString();
         CreateMesh();
