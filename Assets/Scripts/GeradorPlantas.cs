@@ -25,6 +25,12 @@ public class GeradorPlantas : MonoBehaviour
     [SerializeField] private Material PlantMaterial;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
+
+    private GameObject plantObject;
+    private float velocidadeDoVento= 0.5f;
+
+
+
     void Start()
     {
         plant = Random.value < 0.5f ? axiom : second_axiom;
@@ -157,16 +163,19 @@ public class GeradorPlantas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // //efeito do vento
-        // tempoDecorrido += Time.deltaTime * velocidadeDoVento;
-        // float intensidadeVento = Mathf.Sin(tempoDecorrido * velocidadeDoVento);
-        // foreach(GameObject ramo in ramos) {
+        //efeito do vento
+        //tempoDecorrido += Time.deltaTime * velocidadeDoVento;
+        //float intensidadeVento = Mathf.Sin(tempoDecorrido * velocidadeDoVento);
+        //foreach(GameObject ramo in ramos) {
         //     ramo.transform.Rotate(Vector3.up, intensidadeVento * 5.0f); // Aplica rotação ao ramo - ajustar o valor conforme necessário
-        // }
+        //}
+        
+
     }
     void CreateMesh(){
         Vector3 initialPosition; 
-        GameObject plantObject = new GameObject("Plant");
+        //GameObject plantObject = new GameObject("Plant");
+        plantObject = new GameObject("Plant");
         var meshFilter = plantObject.AddComponent<MeshFilter>();
         meshFilter.mesh = new Mesh();
         var meshRenderer = plantObject.AddComponent<MeshRenderer>();
