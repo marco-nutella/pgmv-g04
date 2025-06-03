@@ -24,7 +24,7 @@ public class GeradorPlantas : MonoBehaviour
     // [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
     [SerializeField] private GameObject folhaPrefab;
-    [SerializeField] private float folhaOffset = 0.05f;
+    [SerializeField] private float folhaOffset = 0.01f;
     
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
@@ -207,7 +207,8 @@ public class GeradorPlantas : MonoBehaviour
                     if (Random.value < 0.3f) // 30% de chance
                     {
                         Vector3 pos = transform.position - transform.up * folhaOffset;
-                        Quaternion rot = Quaternion.LookRotation(transform.forward);
+                        Quaternion rot = Quaternion.LookRotation(transform.up, transform.forward);
+                        //Quaternion rot = Quaternion.LookRotation(transform.forward);
                         GameObject folha = Instantiate(folhaPrefab, pos, rot, plantObject.transform);
                         folha.transform.up = transform.up;
                     }

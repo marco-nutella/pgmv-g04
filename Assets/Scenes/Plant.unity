@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -451,8 +451,8 @@ MonoBehaviour:
   angleMin: 10
   angleMax: 15
   PlantMaterial: {fileID: 2100000, guid: eebc1b492cc544154b43f5bfbf1be68c, type: 2}
-  windSpeed: 2
-  windStrength: 0.5
+  folhaPrefab: {fileID: 3950998926850187573, guid: aa5adbe45e4ec40988b0320e612d581b, type: 3}
+  folhaOffset: 0.05
 --- !u!4 &1704682995
 Transform:
   m_ObjectHideFlags: 0
