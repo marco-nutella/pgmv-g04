@@ -2,43 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1dd26aa-d7d8-4ed0-96d2-94a4cfefcb38" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Material/PlantMaterial.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Material/PlantMaterial.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/folhaPrefab.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/folhaPrefab.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Tree.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Tree.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant/SplineExtrude_Test 1.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant/SplineExtrude_Test 1.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant/SplineExtrude_Test.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Plant/SplineExtrude_Test.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GeradorPlantas.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GeradorPlantas.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RecursiveInstaciator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/RecursiveInstaciator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TransformInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TransformInfo.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/Metal032_4K-JPG.usdc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/Metal032_4K-JPG.usdc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Plant.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Plant2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Plant2.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Arm.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Arm.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Hand.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Hand.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Robot.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs (Probuilder)/Robot.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/RobotTest.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/RobotTest.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/CameraSwitcher.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/GenerateArm.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/GenerateArm.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/RobotControler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/RobotControler.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Grower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Grower.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rotation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rotation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CamaraControler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CamaraControler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Robô/CameraSwitcher.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LampScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LampScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +61,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging main__tiago&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -95,11 +83,6 @@
       <updated>1747145477592</updated>
       <workItem from="1747145479626" duration="87000" />
       <workItem from="1747145581420" duration="135000" />
-      <workItem from="1748948092419" duration="45000" />
-      <workItem from="1748948152718" duration="55000" />
-      <workItem from="1748948223713" duration="31000" />
-      <workItem from="1748948266820" duration="37000" />
-      <workItem from="1748948316341" duration="36000" />
     </task>
     <servers />
   </component>
