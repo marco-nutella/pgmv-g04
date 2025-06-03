@@ -23,6 +23,7 @@ public class GeradorPlantas : MonoBehaviour
     // [SerializeField] private float angleYMin;
     // [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
+    [SerializeField] private GameObject folhaPrefab;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
 
@@ -200,6 +201,12 @@ public class GeradorPlantas : MonoBehaviour
                     // LineList.Add(new List<Vector3>(){initialPosition, transform.position});
                     // initialPosition = transform.position;
                     currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
+                    // Instancia folha com aleatoriamente
+                    if (Random.value < 0.3f) // 30% de chance
+                    {
+                        GameObject folha = Instantiate(folhaPrefab, transform.position, Quaternion.identity, plantObject.transform);
+                        folha.transform.up = transform.up; // Alinha com a direção do galho
+                    }
                     break;
                 case 'B':
                     break;
