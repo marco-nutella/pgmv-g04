@@ -21,7 +21,7 @@ public class openCloseInterface : MonoBehaviour
     void Start()
     {
         interfacePanel.SetActive(false);
-        interfaceHelp.SetActive(false);
+        interfaceHelp.SetActive(true);
 
         GameObject mainObject = robot; // O objeto principal
         playerController = mainObject.GetComponent<PlayerController>();
