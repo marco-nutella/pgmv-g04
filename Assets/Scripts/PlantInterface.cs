@@ -18,17 +18,18 @@ public class PlantInterface : MonoBehaviour
     public Button restartButton;
     public Toggle windToggle;
 
-    private PlantGenerator selectedPlant;
+    private GeradorPlantas selectedPlant;
 
     void Start()
     {
+        /**
         playButton.onClick.AddListener(OnPlay);
         pauseButton.onClick.AddListener(OnPause);
         restartButton.onClick.AddListener(OnRestart);
-        windToggle.onValueChanged.AddListener(OnToggleWind);
+        windToggle.onValueChanged.AddListener(OnToggleWind);*/
     }
 
-    public void SetSelectedPlant(PlantGenerator plant)
+    public void SetSelectedPlant(GeradorPlantas plant)
     {
         selectedPlant = plant;
 
@@ -58,8 +59,9 @@ public class PlantInterface : MonoBehaviour
     }
 
     //Necessario criar funções para play, pause, restart
+    /**
     void OnPlay() => selectedPlant?.PlayGrowth();
     void OnPause() => selectedPlant?.PauseGrowth();
     void OnRestart() => selectedPlant?.RestartGrowth();
-    void OnToggleWind(bool isOn) => selectedPlant?.SetWind(isOn);
+    void OnToggleWind(bool isOn) => selectedPlant?.SetWind(isOn);*/
 }
