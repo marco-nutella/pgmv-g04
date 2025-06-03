@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Rotation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float angle = 30;
+    //RecursiveBundle bundle
+
+    public void Generated(int index)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        this.transform.rotation *= Quaternion.Euler(angle * ((index * 2) - 1), 0, 0);
     }
 }
