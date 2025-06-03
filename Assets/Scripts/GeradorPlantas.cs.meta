@@ -3,7 +3,9 @@ guid: f3f273f594d144298b7b49501e03ab08
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PlantMaterial: {instanceID: 0}
+  - folhaPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
