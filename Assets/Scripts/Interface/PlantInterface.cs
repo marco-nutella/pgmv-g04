@@ -14,7 +14,6 @@ public class PlantInterface : MonoBehaviour
 
     //adicionar velocidade do vento
 
-
     public Button playButton;
     public Button pauseButton;
     public Button restartButton;

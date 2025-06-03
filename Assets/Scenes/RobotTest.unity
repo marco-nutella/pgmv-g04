@@ -1146,6 +1146,7 @@ GameObject:
   - component: {fileID: 155897156}
   - component: {fileID: 155897155}
   - component: {fileID: 155897154}
+  - component: {fileID: 155897158}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1238,6 +1239,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &155897158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155897153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa1495d397a79a40a8f3945c52939d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfacePanel: {fileID: 258857617}
+  interfaceHelp: {fileID: 2030990336}
+  robot: {fileID: 2047404406}
 --- !u!43 &165844109
 Mesh:
   m_ObjectHideFlags: 0
@@ -2216,7 +2232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &258857618
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10848,7 +10864,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 45
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -10875,7 +10891,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 7.9, z: 9}
+  m_LocalPosition: {x: 10, y: 11.4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20927,7 +20943,7 @@ GameObject:
   - component: {fileID: 2030990339}
   - component: {fileID: 2030990338}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Instru\xE7\xF5es"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20972,9 +20988,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Teclas W,A,S,D para deslocar o rob\xF4 horizontal\nTecla Q, Z para deslocar
-    o rob\xF4 vertical\nTecla V para alterar a vis\xE3o do rob\xF4 1\xBApessoa e
-    3\xBApessoa\nTecla E para apanhar ou largar planta"
+  m_text: "Teclas W,A,S,D - Deslocamento do rob\xF4 na horizontal\nTecla Q, Z - Deslocamento
+    do rob\xF4 na vertical\nTecla V - Alterar a vis\xE3o do rob\xF4\nTecla E - Apanhar/Largar
+    planta\nTecla ESC - On/Off da Interface para manipula\xE7\xE3o do planta\nTecla
+    H - On/Off das instru\xE7\xF5es do rob\xF4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

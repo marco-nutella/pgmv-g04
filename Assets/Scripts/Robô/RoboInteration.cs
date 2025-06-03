@@ -10,6 +10,13 @@ public class GenerateArm : MonoBehaviour
     [SerializeField] GameObject handPrefab;
     [SerializeField] GameObject leftShoulderPoint;
     [SerializeField] GameObject rightShoulderPoint;
+    private bool canMove = true;
+
+    public void blockMoveInteraction(bool value)
+    {
+        canMove = value;
+        Debug.Log("Interações do robô está " + canMove );
+    }
 
     public KeyCode grabKey = KeyCode.E;
     private bool isHoldObject = false;
@@ -53,6 +60,11 @@ public class GenerateArm : MonoBehaviour
     }
 
     void Update(){
+        
+        if(canMove){
+
+        
+
         if (Input.GetKeyDown(grabKey)){
              
             //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
@@ -84,7 +96,7 @@ public class GenerateArm : MonoBehaviour
                 }
             }
         }
-
+        } 
     }
 
     private bool canGrabPlanta(){
