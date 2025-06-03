@@ -25,7 +25,9 @@ public class GeradorPlantas : MonoBehaviour
     [SerializeField] private Material PlantMaterial;
     [SerializeField] private GameObject folhaPrefab;
     [SerializeField] private float folhaOffset = 0.01f;
-    
+    // [SerializeField] private float branchWidth = 0.1f;
+    // [SerializeField] private float leafScale = 1.0f;
+    // [SerializeField] private float leafProbability = 0.7f;
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
 
