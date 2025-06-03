@@ -70,14 +70,16 @@ public class GenerateArmOld : MonoBehaviour
         }
 
         Ray ray = new Ray(holdPoint.position, holdPoint.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, grabRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, grabRange) && heldObject != null)
         {
             if (hit.collider.CompareTag("Planta"))
             {
                 mensage.enabled = true;
             }
+        } else 
+        {
+            mensage.enabled = false;
         }
-        else{mensage.enabled = false;}
 
         if (isMovingArms)
         {
@@ -146,7 +148,7 @@ public class GenerateArmOld : MonoBehaviour
         if (heldObject == null) return;
 
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rb != null) 
         {
             rb.isKinematic = false;
         }

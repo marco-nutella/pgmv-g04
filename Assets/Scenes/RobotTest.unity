@@ -10776,6 +10776,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10824,7 +10825,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 45
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -10851,7 +10852,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 11.4, z: -4}
+  m_LocalPosition: {x: 10, y: 7.9, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10891,6 +10892,21 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccb09a0976da05489e50bc4b0aee707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera_first: {fileID: 1301251604}
+  virtualCamera_third: {fileID: 1388685563}
+  sensibilidade: 1
 --- !u!43 &1006267116
 Mesh:
   m_ObjectHideFlags: 0
@@ -21059,6 +21075,10 @@ PrefabInstance:
     - target: {fileID: 2417764951088424701, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2916997280912666222, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
+      propertyPath: m_Constraints
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 2916997280912666222, guid: 51cd38850ae3495419ea7aec01f1b310, type: 3}
       propertyPath: m_CollisionDetection
