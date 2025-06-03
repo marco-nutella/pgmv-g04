@@ -207,17 +207,41 @@ public class GeradorPlantas : MonoBehaviour
                     currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
                     // Instancia folha com aleatoriamente
                     /* if (Random.value < 0.3f) // 30% de chance
-                    {
+            {
                         Vector3 pos = transform.position - transform.up * folhaOffset;
                         Quaternion rot = Quaternion.LookRotation(transform.up, transform.forward);
                         //Quaternion rot = Quaternion.LookRotation(transform.forward);
                         GameObject folha = Instantiate(folhaPrefab, pos, rot, plantObject.transform);
                         folha.transform.up = transform.up;
                     } */
+                    // if (Random.value < 0.3f)
+                    // {
+                    //     float lateralOffset = 0.03f;
+                    //     float verticalOffset = 0.01f;
+
+                    //     for (int i = -1; i <= 1; i += 2)
+                    //     {
+                    //         Vector3 side = transform.right * i * lateralOffset;
+                    //         Vector3 back = -transform.up * verticalOffset;
+                    //         Vector3 pos = transform.position + side + back;
+
+                    //         Quaternion rot = Quaternion.LookRotation(transform.forward, transform.up);
+                    //         GameObject folha = Instantiate(folhaPrefab, pos, rot, plantObject.transform);
+                    //         folha.transform.up = transform.up;
+
+                    //         // Corrige o offset com base no centro do mesh
+                    //         Renderer rend = folha.GetComponentInChildren<Renderer>();
+                    //         if (rend != null)
+                    //         {
+                    //             Vector3 meshCenterOffset = rend.bounds.center - folha.transform.position;
+                    //             folha.transform.position -= meshCenterOffset;
+                    //         }
+                    //     }
+                    // }
                     if (Random.value < 0.3f)
                     {
-                        float lateralOffset = 0.03f;
-                        float verticalOffset = 0.01f;
+                        float lateralOffset = 0.02f; // Ajuste fino
+                        float verticalOffset = 0.005f; // Mais colado ao ramo
 
                         for (int i = -1; i <= 1; i += 2)
                         {
@@ -225,11 +249,13 @@ public class GeradorPlantas : MonoBehaviour
                             Vector3 back = -transform.up * verticalOffset;
                             Vector3 pos = transform.position + side + back;
 
-                            Quaternion rot = Quaternion.LookRotation(transform.forward, transform.up);
+                            // Folha aponta para fora do ramo
+                            Quaternion rot = Quaternion.LookRotation(i * transform.right, transform.up);
+
                             GameObject folha = Instantiate(folhaPrefab, pos, rot, plantObject.transform);
                             folha.transform.up = transform.up;
 
-                            // Corrige o offset com base no centro do mesh
+                            // Ajuste fino de centro do mesh da folha
                             Renderer rend = folha.GetComponentInChildren<Renderer>();
                             if (rend != null)
                             {
@@ -238,7 +264,6 @@ public class GeradorPlantas : MonoBehaviour
                             }
                         }
                     }
-
 
                     break;
                 case 'B':
