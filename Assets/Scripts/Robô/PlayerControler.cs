@@ -6,6 +6,14 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1f;
     public float flyForce = 1f;
     public float turnRate = 3f;
+    
+    private bool canMove = true;
+
+    public void blockMoveInteraction(bool value)
+    {
+        canMove = value;
+        Debug.Log("Controlador do robô está "+ canMove );
+    }
 
     private Rigidbody rb;
 
@@ -19,6 +27,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //if (FindObjectOfType<GenerateArm>().isMovingArms) return;
+        if(canMove) {
+
         float moveX = Input.GetAxis("Horizontal"); // esquerda/direita (gira)
         float moveZ = Input.GetAxis("Vertical");   // frente/trás (move)
 
@@ -37,6 +48,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(KeyCode.Z))
         {
             rb.AddForce(Vector3.down * flyForce, ForceMode.VelocityChange);
+        }
         }
     }
 }
