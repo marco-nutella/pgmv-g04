@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs (Probuilder)/Armario V.2 1.prefab.meta
 guid: 276818376c0baca4db04d3b1e540a7a5
+========
+guid: aa5adbe45e4ec40988b0320e612d581b
+>>>>>>>> main_sara:Assets/Prefabs (Descarregados)/folhaPrefab.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
