@@ -254,62 +254,73 @@ public class GeradorPlantas : MonoBehaviour
                     // initialPosition = transform.position;
                     transform.Translate(Vector3.up*length);
 
-                        ramos.Add(transform); // Guarda este ramo
-                        // LineList.Add(new List<Vector3>(){initialPosition, transform.position});
-                        // initialPosition = transform.position;
-                        currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
+                    ramos.Add(transform); // Guarda este ramo
+                    // LineList.Add(new List<Vector3>(){initialPosition, transform.position});
+                    // initialPosition = transform.position;
+                    currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
 
-                        if (Random.value < 0.3f)
+                    if (Random.value < 0.3f)
+                    {
+
+                        float lateralOffset = 0.02f; // Ajuste fino
+                        float verticalOffset = 0.005f; // Mais colado ao ramo
+
+
+                        for (int i = -1; i <= 1; i += 2)
                         {
+                            Vector3 side = transform.right * i * lateralOffset;
+                            Vector3 back = -transform.up * verticalOffset;
+                            Vector3 pos = transform.position + side + back;
 
-                            float lateralOffset = 0.02f; // Ajuste fino
-                            float verticalOffset = 0.005f; // Mais colado ao ramo
+                            // Folha aponta para fora do ramo
+                            Quaternion rot = Quaternion.LookRotation(i * transform.right, transform.up);
+
+                            GameObject folha = Instantiate(Leaf, pos, rot, plantObject.transform);
+                            folhas.Add(folha.transform);
 
 
-                            for (int i = -1; i <= 1; i += 2)
+                            folha.transform.up = transform.up;
+
+                            // Ajuste fino de centro do mesh da folha
+                            Renderer rend = folha.GetComponentInChildren<Renderer>();
+                            if (rend != null)
                             {
-                                Vector3 side = transform.right * i * lateralOffset;
-                                Vector3 back = -transform.up * verticalOffset;
-                                Vector3 pos = transform.position + side + back;
-
-                                // Folha aponta para fora do ramo
-                                Quaternion rot = Quaternion.LookRotation(i * transform.right, transform.up);
-
-                                GameObject folha = Instantiate(Leaf, pos, rot, plantObject.transform);
-                                folhas.Add(folha.transform);
-
-
-                                folha.transform.up = transform.up;
-
-                                // Ajuste fino de centro do mesh da folha
-                                Renderer rend = folha.GetComponentInChildren<Renderer>();
-                                if (rend != null)
-                                {
-                                    Vector3 meshCenterOffset = rend.bounds.center - folha.transform.position;
-                                    folha.transform.position -= meshCenterOffset;
-                                }
-                                float scale = Random.Range(0.8f, 1.2f); // Escala aleatória para a folha
-                                folha.transform.localScale *= scale;
-
-                                // Rotação aleatória
-                                folha.transform.Rotate(Vector3.up, Random.Range(-15f, 15f), Space.Self);
-
-
-                                folhasRotacoesOriginais.Add(folha.transform.localRotation); // Guarda a rotação original da folha
+                                Vector3 meshCenterOffset = rend.bounds.center - folha.transform.position;
+                                folha.transform.position -= meshCenterOffset;
                             }
+                            float scale = Random.Range(0.8f, 1.2f); // Escala aleatória para a folha
+                            folha.transform.localScale *= scale;
+
+                            // Rotação aleatória
+                            folha.transform.Rotate(Vector3.up, Random.Range(-15f, 15f), Space.Self);
+
+
+                            folhasRotacoesOriginais.Add(folha.transform.localRotation); // Guarda a rotação original da folha
                         }
-                        // Flor no final do ramo
-                        if (flower != null)
+                    }
+                    
+
+                    // Flor no final do ramo
+                    if (flower != null && Random.value < 0.5f) // chance de flor
+                    {
+                        Vector3 florPos = transform.position + transform.up * 0.05f; // ligeiramente acima
+                        Quaternion florRot = Quaternion.LookRotation(transform.up);  // aponta na direção do ramo
+                        GameObject flor = Instantiate(flower, florPos, florRot, plantObject.transform);
+
+
+                        // flor.transform.Rotate(Vector3.right, 90); // depende da orientação do prefab
+                        flor.transform.up = transform.up;
+
+                        Renderer rendFlor = flor.GetComponentInChildren<Renderer>();
+                        if (rendFlor != null)
                         {
-                            Vector3 florPos = transform.position + transform.up * 0.01f; // ligeiramente acima
-                            Quaternion florRot = Quaternion.LookRotation(transform.up);  // aponta na direção do ramo
-                            GameObject flor = Instantiate(flower, florPos, florRot, plantObject.transform);
-
-                            // Ajuste opcional: escalar ou alinhar melhor
-                            flor.transform.Rotate(Vector3.right, 90); // depende da orientação do prefab
-                            flor.transform.localScale *= Random.Range(0.9f, 1.1f);
+                            Vector3 meshCenterOffset = rendFlor.bounds.center - flor.transform.position;
+                            flor.transform.position -= meshCenterOffset;
                         }
 
+                        // Escala aleatória leve
+                        flor.transform.localScale *= Random.Range(0.9f, 1.1f);
+                    }
                         
 
                     break;
