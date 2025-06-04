@@ -34,7 +34,7 @@ public class GeradorPlantas : MonoBehaviour
     // [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
     [SerializeField] private GameObject Leaf;
-    //private GameObject Flower;
+    [SerializeField] private GameObject flower;
     [SerializeField] private float folhaOffset = 0.01f;
 
     // [SerializeField] private float branchWidth = 0.1f;
@@ -298,6 +298,18 @@ public class GeradorPlantas : MonoBehaviour
                                 folhasRotacoesOriginais.Add(folha.transform.localRotation); // Guarda a rotação original da folha
                             }
                         }
+                        // Flor no final do ramo
+                        if (flower != null)
+                        {
+                            Vector3 florPos = transform.position + transform.up * 0.01f; // ligeiramente acima
+                            Quaternion florRot = Quaternion.LookRotation(transform.up);  // aponta na direção do ramo
+                            GameObject flor = Instantiate(flower, florPos, florRot, plantObject.transform);
+
+                            // Ajuste opcional: escalar ou alinhar melhor
+                            flor.transform.Rotate(Vector3.right, 90); // depende da orientação do prefab
+                            flor.transform.localScale *= Random.Range(0.9f, 1.1f);
+                        }
+
                         
 
                     break;
