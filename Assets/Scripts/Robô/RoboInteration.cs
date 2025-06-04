@@ -62,41 +62,50 @@ public class GenerateArm : MonoBehaviour
     void Update(){
         
         if(canMove){
+            if (Input.GetKeyDown(grabKey)){
+                //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
+                if(heldObject == null && canGrabPlanta() && !isMovingArms){
+                    moveArmsMotion(true);
+                }
 
-        
-
-        if (Input.GetKeyDown(grabKey)){
-             
-            //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
-            if(heldObject == null && canGrabPlanta() && !isMovingArms){
-                moveArmsMotion(true);
+                if(heldObject != null){
+                    releaseObject();
+                    moveArmsMotion();
+                }
             }
+            
+            if (isMovingArms){
+                armMoveProgress += Time.deltaTime;
+                float t = Mathf.Clamp01(armMoveProgress / armMoveDuration);
 
-            if(heldObject != null){
-                releaseObject();
-                moveArmsMotion();
-            }
+                leftShoulderPoint.transform.rotation = Quaternion.Slerp(leftShoulderPoint.transform.rotation, targetRotationLeft, t);
+                rightShoulderPoint.transform.rotation = Quaternion.Slerp(rightShoulderPoint.transform.rotation, targetRotationRight, t);
 
-        }
-        
-        if (isMovingArms){
-            armMoveProgress += Time.deltaTime;
-            float t = Mathf.Clamp01(armMoveProgress / armMoveDuration);
-
-            leftShoulderPoint.transform.rotation = Quaternion.Slerp(leftShoulderPoint.transform.rotation, targetRotationLeft, t);
-            rightShoulderPoint.transform.rotation = Quaternion.Slerp(rightShoulderPoint.transform.rotation, targetRotationRight, t);
-
-            if (t >= 1f)
-            {
-                isMovingArms = false;
-                if (shouldGrabAfterMove)
+                if (t >= 1f)
                 {
-                    shouldGrabAfterMove = false;
-                    grabObject();
+                    isMovingArms = false;
+                    if (shouldGrabAfterMove)
+                    {
+                        shouldGrabAfterMove = false;
+                        grabObject();
+                    }
                 }
             }
         }
-        } 
+
+        if(heldObject == null){
+            Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+            foreach (var col in colliders)
+            {
+                if (col.CompareTag("Planta"))
+                {   
+                    col.GetComponent<MensageInteration>().showMensage();
+                    break;
+                }
+            }
+        } else {
+            heldObject.GetComponent<MensageInteration>().showMensage();
+        }
     }
 
     private bool canGrabPlanta(){
@@ -109,7 +118,7 @@ public class GenerateArm : MonoBehaviour
         return false;
     }
 
-/**
+    /**
     void grabObject()
     {        
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
@@ -140,6 +149,7 @@ public class GenerateArm : MonoBehaviour
             }
         }
     }*/
+
     void grabObject()
     {
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
@@ -185,6 +195,8 @@ public class GenerateArm : MonoBehaviour
             heldObject.transform.SetParent(holdPoint);
             heldObject.transform.localPosition = Vector3.zero;
             heldObject.transform.localRotation = Quaternion.identity;
+
+            //Alterar mensagem para Esc
         }
     }
 
@@ -212,6 +224,8 @@ public class GenerateArm : MonoBehaviour
         heldObject.transform.SetParent(null);
         heldObject = null;
         heldObjectCollider = null;
+
+        //Alterar mensagem para E
     }
 
     void moveArmsMotion(bool grabAfter = false){
