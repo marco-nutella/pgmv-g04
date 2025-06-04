@@ -303,7 +303,7 @@ public class GeradorPlantas : MonoBehaviour
                     // Flor no final do ramo
                     if (flower != null && Random.value < 0.5f) // chance de flor
                     {
-                        Vector3 florPos = transform.position + transform.up * 0.05f; // ligeiramente acima
+                        Vector3 florPos = transform.position; // ligeiramente acima
                         Quaternion florRot = Quaternion.LookRotation(transform.up);  // aponta na direção do ramo
                         GameObject flor = Instantiate(flower, florPos, florRot, plantObject.transform);
 
