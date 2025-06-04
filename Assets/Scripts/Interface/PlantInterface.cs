@@ -2,67 +2,80 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlantInterface : MonoBehaviour
 {
-    public InputField axiomaInput;
-    public InputField iterationsInput;
-    public InputField lengthInput;
-    public InputField minAngleInput;
-    public InputField maxAngleInput;
-    public InputField speedWindInput;
+    [Header("Input Fields")]
+    [SerializeField] private TMP_InputField axiomaInput;
+    [SerializeField] private TMP_InputField iterationsInput;
+    [SerializeField] private TMP_InputField lengthInput;
+    [SerializeField] private TMP_InputField minAngleInput;
+    [SerializeField] private TMP_InputField maxAngleInput;
+    [SerializeField] private TMP_InputField speedWindInput;
 
-    //adicionar velocidade do vento
+    [Header("Buttons")]
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button restartButton;
 
-    public Button playButton;
-    public Button pauseButton;
-    public Button restartButton;
-    public Toggle windToggle;
+    [Header("Toggle")]
+    [SerializeField] private Toggle windToggle;
 
-    //private GeradorPlantas selectedPlant;
+    private GeradorPlantasTest selectedPlant;
 
     void Start()
     {
-        /**
         playButton.onClick.AddListener(OnPlay);
         pauseButton.onClick.AddListener(OnPause);
         restartButton.onClick.AddListener(OnRestart);
-        windToggle.onValueChanged.AddListener(OnToggleWind);*/
+        windToggle.onValueChanged.AddListener(OnToggleWind);
     }
-    /**
-    public void SetSelectedPlant(GeradorPlantas plant)
-    {
-        
-        selectedPlant = plant;
+    
+    public void getDadosPlanta(GameObject holdPoint){
+        if (holdPoint.transform.childCount == 0)
+        {
+            Debug.LogError("HoldPoint não tem objetos filhos.");
+            return;
+        }
 
-        // Preencher os campos com os valores atuais da planta
-        axiomaInput.text = plant.axiom;
-        iterationsInput.text = plant.iterations.ToString();
-        lengthInput.text = plant.length.ToString();
-        minAngleInput.text = plant.minAngle.ToString();
-        maxAngleInput.text = plant.maxAngle.ToString();
-        //adicionar velocidade do vento
+        GameObject heldPlant = holdPoint.transform.GetChild(0).gameObject;
+        selectedPlant = heldPlant.GetComponent<GeradorPlantasTest>();
+
+        if (selectedPlant == null) Debug.LogError("Script GeradorPlantasTest não encontrado!");
         
-    }*/
+        axiomaInput.text = selectedPlant.axiom;
+        iterationsInput.text = selectedPlant.iterations.ToString();
+        lengthInput.text = selectedPlant.length.ToString();
+        minAngleInput.text = selectedPlant.minAngle.ToString();
+        maxAngleInput.text = selectedPlant.maxAngle.ToString();
+        speedWindInput.text = selectedPlant.windSpeed.ToString();
+        windToggle.isOn = selectedPlant.windEnabled;        
+
+    }
 
     void Update()
     {
-        /**
         if (selectedPlant != null)
         {
             // Atualizar parâmetros em tempo real
             selectedPlant.axiom = axiomaInput.text;
+
             int.TryParse(iterationsInput.text, out selectedPlant.iterations);
             float.TryParse(lengthInput.text, out selectedPlant.length);
             float.TryParse(minAngleInput.text, out selectedPlant.minAngle);
             float.TryParse(maxAngleInput.text, out selectedPlant.maxAngle);
-        }*/
+            float.TryParse(speedWindInput.text, out selectedPlant.windSpeed);
+
+            selectedPlant.SetWind(windToggle.isOn);
+        }
     }
 
-    /**
+
+    
     void OnPlay() => selectedPlant?.PlayGrowth();
     void OnPause() => selectedPlant?.PauseGrowth();
     void OnRestart() => selectedPlant?.RestartGrowth();
     void OnToggleWind(bool isOn) => selectedPlant?.SetWind(isOn);
-    */
+    
 }

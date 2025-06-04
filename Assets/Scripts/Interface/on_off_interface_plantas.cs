@@ -39,6 +39,9 @@ public class openCloseInterface : MonoBehaviour
         {
             if (holdPoint.transform.childCount > 0)
             {
+                PlantInterface plantInterface = interfacePanel.GetComponent<PlantInterface>();
+                plantInterface.getDadosPlanta(holdPoint);
+
                 bool isActive = interfacePanel.activeSelf;
                 interfacePanel.SetActive(!isActive);
 
