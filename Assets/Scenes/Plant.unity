@@ -450,8 +450,10 @@ MonoBehaviour:
   length: 1
   angleMin: 10
   angleMax: 15
+  velocidadeDoVento: 1
   PlantMaterial: {fileID: 2100000, guid: eebc1b492cc544154b43f5bfbf1be68c, type: 2}
   Leaf: {fileID: 1403680551465060997, guid: 549ce2c40e3a2468192f169d0ffe62a0, type: 3}
+  flower: {fileID: 7681739768949022961, guid: a05c87c89e2cf480cafd024a430a7491, type: 3}
   folhaOffset: 0.05
 --- !u!4 &1704682995
 Transform:
