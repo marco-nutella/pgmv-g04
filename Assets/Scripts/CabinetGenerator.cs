@@ -248,13 +248,13 @@ public class CabinetGenerator : MonoBehaviour
 
     private void PlaceDoorsOnCabinet(int width, int height, Vector3 startingPosition)
     {
-        Vector3 endPosition = startingPosition - transform.right * (4*2) * width;
+        Vector3 endPosition = startingPosition - transform.right * (4 * 2) * width;
         Vector3 positionDistanceVector = endPosition - startingPosition;
         float worldUnitsWidth = positionDistanceVector.magnitude;
 
-        Vector3 leftStartingPosition = startingPosition + transform.right * ((3*worldUnitsWidth/4) + 4); // Fazemos um offset de 4 para ajustar a posição.
+        Vector3 leftStartingPosition = startingPosition + transform.right * ((3 * worldUnitsWidth / 4) + 4); // Fazemos um offset de 4 para ajustar a posição.
         leftStartingPosition += transform.forward * 0.25f;
-        Vector3 rightStartingPosition = startingPosition + transform.right * ((worldUnitsWidth/4) + 4);
+        Vector3 rightStartingPosition = startingPosition + transform.right * ((worldUnitsWidth / 4) + 4);
 
         GameObject leftDoor = Instantiate(doorPrefabsFromInspector[0], leftStartingPosition, transform.rotation);
         GameObject rightDoor = Instantiate(doorPrefabsFromInspector[1], rightStartingPosition, transform.rotation);
@@ -267,6 +267,12 @@ public class CabinetGenerator : MonoBehaviour
 
         leftDoor.transform.localScale = newScale;
         rightDoor.transform.localScale = newScale;
+
+        GameObject leftDoorCube = leftDoor.transform.Find("Cube (5)").gameObject;
+        GameObject rightDoorCube = rightDoor.transform.Find("Cube (5)").gameObject;
+
+        leftDoorCube.GetComponent<CubicleScript>().moveDistance = leftDoor.transform.localScale.x * 3.5f;
+        rightDoorCube.GetComponent<CubicleScript>().moveDistance = leftDoor.transform.localScale.x * 3.5f;
     }
 
     public void GenerateCabinet()

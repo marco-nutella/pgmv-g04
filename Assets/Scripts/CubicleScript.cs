@@ -5,7 +5,7 @@ public class CubicleScript : UtilityScript
     [SerializeField]
     private AnimationCurve animationCurve;
     [SerializeField]
-    private float moveDistance = 1.75f; // Distância de abertura/fechamento
+    public float moveDistance = 1.75f; // Distância de abertura/fechamento
     [SerializeField]
     public bool abreParaEsquerda = true; // Define se a porta abre para direita ou esquerda
     private bool aberta = false; // Estado atual da porta (fechada = false, aberta = true)
