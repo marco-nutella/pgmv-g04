@@ -48,6 +48,72 @@ public class GenerateArm : MonoBehaviour
     private float armMoveProgress = 0f;
     private float armMoveDuration = 0.3f; // duração da animação dos braços em segundos
 
+    private GameObject[] validMounts;
+    private GameObject? nearestMount;
+    private float? nearestMountDistance;
+    private float maxMountDistance = 8.0f;
+
+    private bool IsPlantInsideMount(GameObject mount) { // https://discussions.unity.com/t/how-to-find-child-with-tag/129880/2
+		for (int i = 0; i < mount.transform.childCount; i++) 
+		{
+			if(mount.transform.GetChild(i).gameObject.tag == "Planta")
+			{
+                return true;
+			}	
+		}	
+		return false;
+    }
+    private IEnumerator LoopUpdateNearestMount()
+    {
+        yield return new WaitForSeconds(3f);
+        validMounts = GameObject.FindGameObjectsWithTag("PlantMount");
+
+        while (true)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            bool foundNear = false;
+            if (Physics.Raycast(ray, out hit))
+            {
+                foreach (GameObject mount in validMounts)
+                {
+                    float dist = (mount.transform.position - hit.point).magnitude;
+                    float distBody = (mount.transform.position - transform.position).magnitude;
+
+                    if (dist > maxMountDistance || distBody > maxMountDistance) // Although we want the selected mount to be based on what the player is looking at, we don't want it to be too far from their body either.
+                    {
+                        continue;
+                    }
+                    foundNear = true; // We want to clear the data on the nearest mount if the player is not near any
+
+                    if (nearestMountDistance == null || dist < nearestMountDistance)
+                    {
+                        if (nearestMount && !IsPlantInsideMount(nearestMount))
+                        {
+                            nearestMount.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantOutline", typeof(Sprite)) as Sprite;
+                        }
+                        nearestMount = mount;
+                        if (!IsPlantInsideMount(nearestMount)) {
+                            nearestMount.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantPlacement", typeof(Sprite)) as Sprite;
+                        }
+                        nearestMountDistance = dist;
+                    }
+                }
+            }
+
+            if (!foundNear)
+            {
+                if (nearestMount && !IsPlantInsideMount(nearestMount))
+                {
+                    nearestMount.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantOutline", typeof(Sprite)) as Sprite;
+                }
+                nearestMount = null;
+                nearestMountDistance = null;
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
     void Start()
     {
         GenerateArms();
@@ -57,6 +123,8 @@ public class GenerateArm : MonoBehaviour
 
         targetRotationLeft = leftShoulder.transform.rotation;
         targetRotationRight = rightShoulder.transform.rotation;
+
+        StartCoroutine(LoopUpdateNearestMount());
     }
 
     void Update(){
@@ -182,6 +250,10 @@ public class GenerateArm : MonoBehaviour
             }
 
             // Anexa ao holdPoint (parenting)
+            if (heldObject.transform.parent && heldObject.transform.parent.tag == "PlantMount")
+            {
+                heldObject.transform.parent.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantPlacement", typeof(Sprite)) as Sprite;
+            }
             heldObject.transform.SetParent(holdPoint);
             heldObject.transform.localPosition = Vector3.zero;
             heldObject.transform.localRotation = Quaternion.identity;
@@ -209,7 +281,12 @@ public class GenerateArm : MonoBehaviour
         }
 
         // Solta o objeto
-        heldObject.transform.SetParent(null);
+        heldObject.transform.SetParent(nearestMount?.transform);
+        if (nearestMount != null)
+        {
+            heldObject.transform.position = nearestMount.transform.position;
+            nearestMount.GetComponent<SpriteRenderer>().sprite = null;
+        }
         heldObject = null;
         heldObjectCollider = null;
     }
