@@ -23,7 +23,7 @@ public class GeradorPlantas : MonoBehaviour
     // [SerializeField] private float angleYMin;
     // [SerializeField] private float angleYMax;
     [SerializeField] private Material PlantMaterial;
-    [SerializeField] private GameObject folhaPrefab;
+    [SerializeField] private GameObject Leaf;
     [SerializeField] private float folhaOffset = 0.01f;
     // [SerializeField] private float branchWidth = 0.1f;
     // [SerializeField] private float leafScale = 1.0f;
@@ -252,7 +252,7 @@ public class GeradorPlantas : MonoBehaviour
                             // Folha aponta para fora do ramo
                             Quaternion rot = Quaternion.LookRotation(i * transform.right, transform.up);
 
-                            GameObject folha = Instantiate(folhaPrefab, pos, rot, plantObject.transform);
+                            GameObject folha = Instantiate(Leaf, pos, rot, plantObject.transform);
                             folha.transform.up = transform.up;
 
                             // Ajuste fino de centro do mesh da folha
