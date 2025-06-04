@@ -222,6 +222,7 @@ public class GeradorPlantas : MonoBehaviour
         Vector3 initialPosition; 
         //GameObject plantObject = new GameObject("Plant");
         plantObject = new GameObject("Plant");
+        plantObject.transform.parent = transform.parent;
         var meshFilter = plantObject.AddComponent<MeshFilter>();
         meshFilter.mesh = new Mesh();
         var meshRenderer = plantObject.AddComponent<MeshRenderer>();
@@ -276,6 +277,7 @@ public class GeradorPlantas : MonoBehaviour
                             Quaternion rot = Quaternion.LookRotation(i * transform.right, transform.up);
 
                             GameObject folha = Instantiate(Leaf, pos, rot, plantObject.transform);
+                            folha.transform.parent = transform.parent;
                             folhas.Add(folha.transform);
 
 
@@ -306,7 +308,7 @@ public class GeradorPlantas : MonoBehaviour
                         Vector3 florPos = transform.position; // ligeiramente acima
                         Quaternion florRot = Quaternion.LookRotation(transform.up);  // aponta na direção do ramo
                         GameObject flor = Instantiate(flower, florPos, florRot, plantObject.transform);
-
+                        flor.transform.parent = transform.parent;
 
                         // flor.transform.Rotate(Vector3.right, 90); // depende da orientação do prefab
                         flor.transform.up = transform.up;

@@ -254,7 +254,7 @@ public class GenerateArm : MonoBehaviour
             {
                 heldObject.transform.parent.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantPlacement", typeof(Sprite)) as Sprite;
             }
-            heldObject.transform.SetParent(holdPoint);
+            heldObject.transform.SetParent(holdPoint, true);
             heldObject.transform.localPosition = Vector3.zero;
             heldObject.transform.localRotation = Quaternion.identity;
         }
@@ -281,7 +281,7 @@ public class GenerateArm : MonoBehaviour
         }
 
         // Solta o objeto
-        heldObject.transform.SetParent(nearestMount?.transform);
+        heldObject.transform.SetParent(nearestMount?.transform, true);
         if (nearestMount != null)
         {
             heldObject.transform.position = nearestMount.transform.position;

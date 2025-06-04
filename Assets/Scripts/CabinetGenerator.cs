@@ -235,7 +235,25 @@ public class CabinetGenerator : MonoBehaviour
                 int componentIndex = componentsList[i];
                 GameObject chosenComponent = componentPrefabsFromInspector[componentIndex];
 
-                components.Add(Instantiate(chosenComponent, transform.position, transform.rotation));
+                GameObject spawnedComponent = Instantiate(chosenComponent, transform.position, transform.rotation);
+                components.Add(spawnedComponent);
+
+                for (int c = 0; c < spawnedComponent.transform.childCount; c++) 
+                {
+                    if(spawnedComponent.transform.GetChild(c).gameObject.tag == "PlantMount")
+                    {
+                        GameObject plantMount = spawnedComponent.transform.GetChild(c).gameObject;
+                        if (UnityEngine.Random.Range(0, 100) > 98)
+                        {
+                            plantMount.GetComponent<SpriteRenderer>().sprite = null;
+
+                            GameObject plant = Instantiate(Resources.Load("Prefabs/PottedPlant", typeof(GameObject)) as GameObject, spawnedComponent.transform.position, spawnedComponent.transform.rotation);
+                            plant.transform.SetParent(spawnedComponent.transform, true);
+                            plant.transform.position = plantMount.transform.position;
+                            plant.transform.localScale *= 0.4f;
+                        }
+                    }	
+                }
                 transform.position += transform.up*3.166f;
             }
             
