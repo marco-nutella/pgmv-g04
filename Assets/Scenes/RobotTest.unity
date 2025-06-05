@@ -1257,6 +1257,7 @@ MonoBehaviour:
   interfaceHelp: {fileID: 2030990336}
   robot: {fileID: 2047404406}
   targetCamera: {fileID: 963194227}
+  targetPlanta: {fileID: 242472614}
   cullingOptions:
   - serializedVersion: 2
     m_Bits: 55
@@ -2068,7 +2069,7 @@ GameObject:
   - component: {fileID: 242472613}
   - component: {fileID: 242472614}
   m_Layer: 6
-  m_Name: Camara_Planta
+  m_Name: CameraPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
