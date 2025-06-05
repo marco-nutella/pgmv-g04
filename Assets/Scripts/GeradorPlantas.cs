@@ -379,28 +379,6 @@ public class GeradorPlantas : MonoBehaviour
             }
         }
     }
-
-    
-    public string GetAxiom() => axiom;
-    public void SetAxiom(string value) => axiom = value;
-
-    public string GetSecondAxiom() => second_axiom;
-    public void SetSecondAxiom(string value) => second_axiom = value;
-
-    public int GetIterations() => iterations;
-    public void SetIterations(int value) => iterations = value;
-
-    public float GetLength() => length;
-    public void SetLength(float value) => length = value;
-
-    public float GetAngleMin() => angleMin;
-    public void SetAngleMin(float value) => angleMin = value;
-
-    public float GetAngleMax() => angleMax;
-    public void SetAngleMax(float value) => angleMax = value;
-
-    public float GetVelocidadeDoVento() => velocidadeDoVento;
-    public void SetVelocidadeDoVento(float value) => velocidadeDoVento = value;
 }
 public static class PlantGeradorExtension
 {
