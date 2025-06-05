@@ -5,28 +5,71 @@ using UnityEngine.UI;
 
 public class MensageInteration : MonoBehaviour
 {
-    public Text mensage;
+    //public Text mensage;
+    public UIMessageController messageController;
+
 
     void Start()
     {
-        mensage.enabled = false;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        //Verificar se o pontoAgarrar está vazio
-        if (other.CompareTag("PontoAgarrar") && other.transform.childCount == 0)
-        {
-            mensage.enabled = true;
-        }
-        
+        //mensage.enabled = false;
+        //messageController.HideMessage();
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("PontoAgarrar"))
+        if (other.CompareTag("PontoAgarrar") && transform.parent == null)
         {
-            mensage.enabled = false;
+            //mensage.enabled = false;
+            messageController.HideMessage();
         }
     }
+
+    public void showMensage(){
+        //messageController.ShowMessage();
+        messageController.ShowMessage();
+
+        if (transform.parent != null)
+        {
+            messageController.SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
+        }
+        else
+        {
+            messageController.SetMessage("Clicar 'E' para apanhar planta");
+        }
+        
+    }
+
+    
+    /**
+    public void SetMessage(string newText)
+    {
+        mensage.text = newText;
+    }*/
+
+    void Update(){
+        /**
+        if (transform.parent != null)
+        {
+            messageController.ShowMessage();
+            messageController.SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
+
+        }
+        else
+        {
+            messageController.SetMessage("Clicar 'E' para apanhar planta");
+        }*/
+
+        /**
+        if (transform.parent != null)
+        {
+            mensage.enabled = true;
+            SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
+        }
+        else
+        {
+            SetMessage("Clicar 'E' para apanhar planta");
+        }
+        */
+    }
 }
+        
