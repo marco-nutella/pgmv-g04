@@ -175,13 +175,20 @@ public class GenerateArm : MonoBehaviour
                 
                     //if (col.CompareTag("Planta"))
                     //{   
-                        col.GetComponent<MensageInteration>().showMensage();
+                        col.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(false);
                         break;
                     }
                 }
             }
         } else {
-            heldObject.GetComponent<MensageInteration>().showMensage();
+            for (int i = 0; i < heldObject.transform.childCount; i++) 
+            {
+                if(heldObject.transform.GetChild(i).gameObject.tag == "Planta")
+                {
+                    heldObject.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(true);
+                }
+                //heldObject.GetComponent<MensageInteration>().showMensage();
+            }
         }
     }
 
@@ -238,6 +245,9 @@ public class GenerateArm : MonoBehaviour
 
             Vector3 originalWorldScale = heldObject.transform.lossyScale;
             heldObject.transform.SetParent(holdPoint, true); // true = manter posição mundial, para preservar rotação/posição
+            
+            
+            
             Vector3 parentWorldScale = holdPoint.lossyScale;
 
             // calcula a escala local correta para manter o mesmo tamanho
@@ -280,7 +290,7 @@ public class GenerateArm : MonoBehaviour
     void releaseObject()
     {
         if (heldObject == null) return;
-
+        
         // Reativa física
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -306,6 +316,7 @@ public class GenerateArm : MonoBehaviour
         }
         heldObject = null;
         heldObjectCollider = null;
+        
 
         //Alterar mensagem para E
     }

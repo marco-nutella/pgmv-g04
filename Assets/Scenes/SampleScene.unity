@@ -1343,7 +1343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40ecd6c8f0406343ba376c3d9f049f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageController: {fileID: 0}
 --- !u!114 &110413756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8353,11 +8352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7847798281419591580, guid: 87f1d786d4282684badb52372a6e826f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.927
+      value: 7.05
       objectReference: {fileID: 0}
     - target: {fileID: 7847798281419591580, guid: 87f1d786d4282684badb52372a6e826f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.88233
+      value: 29.44
       objectReference: {fileID: 0}
     - target: {fileID: 7847798281419591580, guid: 87f1d786d4282684badb52372a6e826f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21727,7 +21726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40ecd6c8f0406343ba376c3d9f049f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageController: {fileID: 0}
 --- !u!54 &1654509245
 Rigidbody:
   m_ObjectHideFlags: 0

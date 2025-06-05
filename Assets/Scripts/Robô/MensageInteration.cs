@@ -6,13 +6,20 @@ using UnityEngine.UI;
 public class MensageInteration : MonoBehaviour
 {
     //public Text mensage;
-    public UIMessageController messageController;
-
+    private UIMessageController messageController;
 
     void Start()
     {
+
         //mensage.enabled = false;
         //messageController.HideMessage();
+       
+        messageController = FindObjectOfType<UIMessageController>();
+        if (messageController == null)
+        {
+            Debug.LogWarning("UIMessageController não foi encontrado na cena.");
+        }
+        
     }
 
     void OnTriggerExit(Collider other)
@@ -24,11 +31,10 @@ public class MensageInteration : MonoBehaviour
         }
     }
 
-    public void showMensage(){
-        //messageController.ShowMessage();
+    public void showMensage(bool isHeld){
         messageController.ShowMessage();
 
-        if (transform.parent != null)
+        if (isHeld)
         {
             messageController.SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
         }
@@ -36,9 +42,7 @@ public class MensageInteration : MonoBehaviour
         {
             messageController.SetMessage("Clicar 'E' para apanhar planta");
         }
-        
     }
-
     
     /**
     public void SetMessage(string newText)
@@ -47,29 +51,6 @@ public class MensageInteration : MonoBehaviour
     }*/
 
     void Update(){
-        /**
-        if (transform.parent != null)
-        {
-            messageController.ShowMessage();
-            messageController.SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
-
-        }
-        else
-        {
-            messageController.SetMessage("Clicar 'E' para apanhar planta");
-        }*/
-
-        /**
-        if (transform.parent != null)
-        {
-            mensage.enabled = true;
-            SetMessage("Clicar 'E' para largar planta ou 'Esc' para manipular");
-        }
-        else
-        {
-            SetMessage("Clicar 'E' para apanhar planta");
-        }
-        */
     }
 }
         
