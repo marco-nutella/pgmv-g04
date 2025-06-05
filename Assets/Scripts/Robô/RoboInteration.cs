@@ -53,6 +53,7 @@ public class GenerateArm : MonoBehaviour
     private float? nearestMountDistance;
     private float maxMountDistance = 8.0f;
 
+    //Procura de objetos que contém a tag "Planta"
     private bool IsPlantInsideMount(GameObject mount) { // https://discussions.unity.com/t/how-to-find-child-with-tag/129880/2
 		for (int i = 0; i < mount.transform.childCount; i++) 
 		{
@@ -114,6 +115,7 @@ public class GenerateArm : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+
     void Start()
     {
         GenerateArms();
@@ -130,84 +132,76 @@ public class GenerateArm : MonoBehaviour
     void Update(){
         
         if(canMove){
+            if (Input.GetKeyDown(grabKey)){
+                //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
+                if(heldObject == null && canGrabPlanta() && !isMovingArms){
+                    moveArmsMotion(true);
+                }
 
-        
-
-        if (Input.GetKeyDown(grabKey)){
-             
-            //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
-            if(heldObject == null && canGrabPlanta() && !isMovingArms){
-                moveArmsMotion(true);
+                if(heldObject != null){
+                    releaseObject();
+                    moveArmsMotion();
+                }
             }
+            
+            if (isMovingArms){
+                armMoveProgress += Time.deltaTime;
+                float t = Mathf.Clamp01(armMoveProgress / armMoveDuration);
 
-            if(heldObject != null){
-                releaseObject();
-                moveArmsMotion();
-            }
+                leftShoulderPoint.transform.rotation = Quaternion.Slerp(leftShoulderPoint.transform.rotation, targetRotationLeft, t);
+                rightShoulderPoint.transform.rotation = Quaternion.Slerp(rightShoulderPoint.transform.rotation, targetRotationRight, t);
 
-        }
-        
-        if (isMovingArms){
-            armMoveProgress += Time.deltaTime;
-            float t = Mathf.Clamp01(armMoveProgress / armMoveDuration);
-
-            leftShoulderPoint.transform.rotation = Quaternion.Slerp(leftShoulderPoint.transform.rotation, targetRotationLeft, t);
-            rightShoulderPoint.transform.rotation = Quaternion.Slerp(rightShoulderPoint.transform.rotation, targetRotationRight, t);
-
-            if (t >= 1f)
-            {
-                isMovingArms = false;
-                if (shouldGrabAfterMove)
+                if (t >= 1f)
                 {
-                    shouldGrabAfterMove = false;
-                    grabObject();
+                    isMovingArms = false;
+                    if (shouldGrabAfterMove)
+                    {
+                        shouldGrabAfterMove = false;
+                        grabObject();
+                    }
                 }
             }
         }
-        } 
+
+        if(heldObject == null){
+            Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+            foreach (var col in colliders)
+            {
+                for (int i = 0; i < col.transform.childCount; i++) 
+                {
+                    if(col.transform.GetChild(i).gameObject.tag == "Planta")
+                    {
+                
+                    //if (col.CompareTag("Planta"))
+                    //{   
+                        col.GetComponent<MensageInteration>().showMensage();
+                        break;
+                    }
+                }
+            }
+        } else {
+            heldObject.GetComponent<MensageInteration>().showMensage();
+        }
     }
 
     private bool canGrabPlanta(){
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
         foreach (var col in colliders)
         {
-            if (col.CompareTag("Planta")){return true;}
+            //if (col.CompareTag("Planta"))
+            for (int i = 0; i < col.transform.childCount; i++) 
+            {
+                if(col.transform.GetChild(i).gameObject.tag == "Planta")
+                {
+                    return true;
+                }
+            }
+                
         }
 
         return false;
     }
 
-/**
-    void grabObject()
-    {        
-        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
-
-        foreach (var col in colliders)
-        {
-            if (col.CompareTag("Planta"))
-            {
-                heldObject = col.gameObject;
-                heldObjectCollider = col;
-
-                // Ignora colisões com TODOS os colliders do jogador
-                foreach (var playerCol in playerColliders){
-                    Physics.IgnoreCollision(heldObjectCollider, playerCol, true);
-                }
-
-                // Desativa física
-                Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-                if (rb != null){
-                    rb.isKinematic = true;
-                }
-
-                // Anexa ao holdPoint (parenting)
-                heldObject.transform.SetParent(holdPoint);
-                heldObject.transform.localPosition = Vector3.zero;
-                heldObject.transform.localRotation = Quaternion.identity;
-                break;
-            }
-        }
-    }*/
     void grabObject()
     {
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
@@ -218,15 +212,20 @@ public class GenerateArm : MonoBehaviour
 
         foreach (var col in colliders)
         {
-            if (col.CompareTag("Planta"))
+            //if (col.CompareTag("Planta"))
+            //{
+            for (int i = 0; i < col.transform.childCount; i++) 
             {
-                float distance = Vector3.Distance(holdPoint.position, col.transform.position);
-
-                if (distance < closestDistance)
+                if(col.transform.GetChild(i).gameObject.tag == "Planta")
                 {
-                    closestDistance = distance;
-                    closestObject = col.gameObject;
-                    closestCollider = col;
+                    float distance = Vector3.Distance(holdPoint.position, col.transform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestObject = col.gameObject;
+                        closestCollider = col;
+                    }
                 }
             }
         }
@@ -235,6 +234,17 @@ public class GenerateArm : MonoBehaviour
         {
             heldObject = closestObject;
             heldObjectCollider = closestCollider;
+
+            Vector3 originalWorldScale = heldObject.transform.lossyScale;
+            heldObject.transform.SetParent(holdPoint, true); // true = manter posição mundial, para preservar rotação/posição
+            Vector3 parentWorldScale = holdPoint.lossyScale;
+
+            // calcula a escala local correta para manter o mesmo tamanho
+            heldObject.transform.localScale = new Vector3(
+                originalWorldScale.x / parentWorldScale.x,
+                originalWorldScale.y / parentWorldScale.y,
+                originalWorldScale.z / parentWorldScale.z
+            );            
 
             // Ignora colisões com todos os colliders do jogador
             foreach (var playerCol in playerColliders)
@@ -254,9 +264,15 @@ public class GenerateArm : MonoBehaviour
             {
                 heldObject.transform.parent.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/PlantPlacement", typeof(Sprite)) as Sprite;
             }
-            heldObject.transform.SetParent(holdPoint, true);
+
+            //heldObject.transform.SetParent(holdPoint, false);
             heldObject.transform.localPosition = Vector3.zero;
             heldObject.transform.localRotation = Quaternion.identity;
+
+            //heldObject.transform.localScale = originalLocalScale; // restaura a escala original local
+
+
+            //Alterar mensagem para Esc
         }
     }
 
@@ -289,6 +305,8 @@ public class GenerateArm : MonoBehaviour
         }
         heldObject = null;
         heldObjectCollider = null;
+
+        //Alterar mensagem para E
     }
 
     void moveArmsMotion(bool grabAfter = false){
@@ -306,23 +324,7 @@ public class GenerateArm : MonoBehaviour
         armMoveProgress = 0f;
         shouldGrabAfterMove = grabAfter;
     }
-    
-    /** void moveArms(){
-        if (Input.GetKeyDown(grabKey)) {
-            isHoldObject = !isHoldObject;
-
-            Quaternion baseRotationLeft = transform.rotation * originalRotationLeftShoulder;
-            Quaternion baseRotationRight = transform.rotation * originalRotationRightShoulder;
-
-            targetRotation = Quaternion.Euler(-50, 0, 0);
-
-            Quaternion grabRotation = isHoldObject ? targetRotation : Quaternion.identity;
-
-            leftShoulderPoint.transform.rotation = baseRotationLeft * grabRotation;
-            rightShoulderPoint.transform.rotation = baseRotationRight * grabRotation;
-        }   
-    }*/
-
+ 
     void GenerateArms(){
   
         Quaternion rotationArmHand = Quaternion.Euler(-45, 0, 0);

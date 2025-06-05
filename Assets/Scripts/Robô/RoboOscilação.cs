@@ -7,6 +7,14 @@ public class RoboOscilação : MonoBehaviour
     public float amplitude = 0.2f;     // Altura do sobe e desce
     public float frequency = 1f;       // Velocidade da oscilação
 
+    private bool canMove = true;
+
+    public void blockMoveInteraction(bool value)
+    {
+        canMove = value;
+        Debug.Log("Controlador do robô está "+ canMove );
+    }
+
     private Vector3 startPos;
 
     void Start()
@@ -16,7 +24,9 @@ public class RoboOscilação : MonoBehaviour
 
     void Update()
     {
-        float offsetY = Mathf.Sin(Time.time * frequency) * amplitude;
-        transform.localPosition = startPos + new Vector3(0, offsetY, 0);
+        if(canMove){
+            float offsetY = Mathf.Sin(Time.time * frequency) * amplitude;
+            transform.localPosition = startPos + new Vector3(0, offsetY, 0);
+        }
     }
 }
