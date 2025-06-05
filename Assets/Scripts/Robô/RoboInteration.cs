@@ -57,10 +57,11 @@ public class GenerateArm : MonoBehaviour
     private bool IsPlantInsideMount(GameObject mount) { // https://discussions.unity.com/t/how-to-find-child-with-tag/129880/2
 		for (int i = 0; i < mount.transform.childCount; i++) 
 		{
-			if(mount.transform.GetChild(i).gameObject.tag == "Planta")
-			{
+            Debug.Log(mount.transform.GetChild(i));
+			if (mount.transform.GetChild(i).gameObject.tag == "Planta")
+            {
                 return true;
-			}	
+            }	
 		}	
 		return false;
     }
