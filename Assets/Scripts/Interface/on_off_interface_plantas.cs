@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class openCloseInterface : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class openCloseInterface : MonoBehaviour
     // Gameobject do robô
     [SerializeField] GameObject robot;
     [SerializeField] Camera targetCamera;
+
+    [SerializeField] CinemachineVirtualCamera targetPlanta;
+
+
     public LayerMask[] cullingOptions;
     private int currentIndex = 0;
 
@@ -30,6 +35,7 @@ public class openCloseInterface : MonoBehaviour
     {
         interfacePanel.SetActive(false);
         interfaceHelp.SetActive(true);
+        targetPlanta.gameObject.SetActive(false);
 
         GameObject mainObject = robot; // O objeto principal
         playerController = mainObject.GetComponent<PlayerController>();
@@ -66,12 +72,34 @@ public class openCloseInterface : MonoBehaviour
                 if(!interfacePanel.activeSelf){
                     //holdPoint.layer = LayerMask.NameToLayer("ManipulacaoPlanta");
                     SetLayerRecursively(holdPoint,LayerMask.NameToLayer("ManipulacaoPlanta"));
-                    holdPoint.transform.localPosition = holdPointOriginalLocalPos + new Vector3(deslocamentoLateral, 0f, 0f);
+                    //holdPoint.transform.localPosition = holdPointOriginalLocalPos + new Vector3(deslocamentoLateral, 0f, 0f);
+
+                    Transform planta = holdPoint.transform.GetChild(0); // A planta dentro do holdPoint
+
+                    targetPlanta.Follow = planta;
+                    targetPlanta.LookAt = planta;
+                    //targetPlanta.Follow = null;
+                    //targetPlanta.LookAt = null;
+
+                    //targetPlanta.transform.position = planta.position + new Vector3(-4,0,-8);
+                    //targetPlanta.transform.rotation = planta.rotation;
+
+                    var transposer = targetPlanta.GetCinemachineComponent<CinemachineTransposer>();
+                    if (transposer != null)
+                    {
+                        transposer.m_FollowOffset = new Vector3(0, 1, 8f); // você pode ajustar o Y conforme necessário
+                    }
+
+                    targetPlanta.gameObject.SetActive(true);
+
 
                 } else {
                     //holdPoint.layer = LayerMask.NameToLayer("Default");
                     SetLayerRecursively(holdPoint,LayerMask.NameToLayer("Default"));
-                    holdPoint.transform.localPosition = holdPointOriginalLocalPos;
+                    //holdPoint.transform.localPosition = holdPointOriginalLocalPos;
+                    targetPlanta.Follow = null;
+                    targetPlanta.LookAt = null;
+                    targetPlanta.gameObject.SetActive(false);
                 }
 
                 PlantInterface plantInterface = interfacePanel.GetComponent<PlantInterface>();
