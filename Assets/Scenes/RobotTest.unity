@@ -1254,7 +1254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interfacePanel: {fileID: 258857617}
-  interfaceHelp: {fileID: 2030990336}
+  interfaceInstructions: {fileID: 2030990336}
+  interfaceInteractions: {fileID: 511511779}
+  interfaceHelp: {fileID: 1284820562}
   robot: {fileID: 2047404406}
   targetCamera: {fileID: 963194227}
   targetPlanta: {fileID: 242472614}
@@ -1262,7 +1264,7 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 55
   - serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 96
 --- !u!43 &165844109
 Mesh:
   m_ObjectHideFlags: 0
