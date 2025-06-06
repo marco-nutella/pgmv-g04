@@ -25,19 +25,22 @@ public class DoorOpen : UtilityScript
     }
     public void OpenDoor()
     {
-        if (!debounce) {
+        AudioManager.Instance.Play(AudioManager.SoundType.DoorOpen);
+        if (!debounce)
+        {
             debounce = true;
 
             Vector3 currentRot = door.transform.localEulerAngles;
             Vector3 currentPos = door.transform.position;
-            
-            if (!open){
+
+            if (!open)
+            {
                 Debug.Log("Opening door");
                 Vector3 newRot = new Vector3(currentRot.x, openRot, currentRot.z);
                 Vector3 newPos = new Vector3(openPos.x, currentPos.y, openPos.z);
 
                 StartCoroutine(TweenGameObjectRotation(door, currentRot, newRot, duration));
-                StartCoroutine(TweenGameObject(door, currentPos, newPos, duration, null, callbackResult => 
+                StartCoroutine(TweenGameObject(door, currentPos, newPos, duration, null, callbackResult =>
                 {
                     debounce = callbackResult;
                 }));
@@ -51,7 +54,7 @@ public class DoorOpen : UtilityScript
                 Vector3 newPos = new Vector3(closePos.x, currentPos.y, closePos.z);
 
                 StartCoroutine(TweenGameObjectRotation(door, currentRot, newRot, duration));
-                StartCoroutine(TweenGameObject(door, currentPos, newPos, duration, null, callbackResult => 
+                StartCoroutine(TweenGameObject(door, currentPos, newPos, duration, null, callbackResult =>
                 {
                     debounce = callbackResult;
                 }));

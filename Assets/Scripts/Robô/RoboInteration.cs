@@ -131,6 +131,7 @@ public class GenerateArm : MonoBehaviour
         targetRotationRight = rightShoulder.transform.rotation;
 
         StartCoroutine(LoopUpdateNearestMount());
+        AudioManager.Instance.ChangeMusic(AudioManager.SoundType.RobotPassiveBuzz);
     }
 
     void Update(){
@@ -299,9 +300,9 @@ public class GenerateArm : MonoBehaviour
 
             Vector3 originalWorldScale = heldObject.transform.lossyScale;
             heldObject.transform.SetParent(holdPoint, true); // true = manter posição mundial, para preservar rotação/posição
-            
-            
-            
+
+
+
             Vector3 parentWorldScale = holdPoint.lossyScale;
 
             // calcula a escala local correta para manter o mesmo tamanho
@@ -309,7 +310,7 @@ public class GenerateArm : MonoBehaviour
                 originalWorldScale.x / parentWorldScale.x,
                 originalWorldScale.y / parentWorldScale.y,
                 originalWorldScale.z / parentWorldScale.z
-            );            
+            );
 
             // Ignora colisões com todos os colliders do jogador
             foreach (var playerCol in playerColliders)
@@ -333,6 +334,7 @@ public class GenerateArm : MonoBehaviour
             //heldObject.transform.SetParent(holdPoint, false);
             heldObject.transform.localPosition = Vector3.zero;
             heldObject.transform.localRotation = Quaternion.identity;
+            AudioManager.Instance.Play(AudioManager.SoundType.PlantPickUp);
 
             //heldObject.transform.localScale = originalLocalScale; // restaura a escala original local
 
@@ -344,7 +346,7 @@ public class GenerateArm : MonoBehaviour
     void releaseObject()
     {
         if (heldObject == null) return;
-        
+
         // Reativa física
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -370,6 +372,7 @@ public class GenerateArm : MonoBehaviour
         }
         heldObject = null;
         heldObjectCollider = null;
+        AudioManager.Instance.Play(AudioManager.SoundType.PlantPlace);
         
 
         //Alterar mensagem para E

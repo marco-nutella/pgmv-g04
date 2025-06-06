@@ -43,18 +43,62 @@ public class GeradorPlantas : MonoBehaviour
     private List<List<Vector3>> LineList = new List<List<Vector3>>();
 
 
+    private Vector3 StartTransformPosition;
+    private Quaternion StartTransformRotation;
+    private Vector3 StartTransformScale;
+    private GameObject SpawnedSplines;
+    private List<GameObject> SpawnedObjectList = new List<GameObject>();
+
+
     private GameObject plantObject;
     //private float velocidadeDoVento= 0.5f;
 
-
-
-    void Start()
+    public void DeletePlant()
     {
-        plant = Random.value < 0.5f ? axiom : second_axiom;
+        if (SpawnedSplines != null)
+        {
+            Destroy(SpawnedSplines);
+        }
+        if (SpawnedObjectList.Count > 0)
+        {
+            foreach (GameObject obj in SpawnedObjectList)
+            {
+                Destroy(obj);
+            }
+        }
+
+        transform.localPosition = StartTransformPosition;
+        transform.localRotation = StartTransformRotation;
+        transform.localScale = StartTransformScale;
+    }
+
+    public void CreatePlant(int? axiom_number = null)
+    {
+        if (axiom_number != null && axiom_number == 1)
+        {
+            plant = axiom;
+        }
+        else if (axiom_number != null && axiom_number == 2)
+        {
+            plant = second_axiom;
+        }
+        else
+        {
+            plant = Random.value < 0.5f ? axiom : second_axiom;
+        }
+        
         //plant = axiom;
         Debug.Log("Iniciando o Gerador de Plantas" + plant);
         ExpandTreeString();
         CreateMesh();
+    }
+
+    void Start()
+    {
+        StartTransformPosition = transform.localPosition;
+        StartTransformRotation = transform.localRotation;
+        StartTransformScale = transform.localScale;
+        CreatePlant();
     }
     private void OnDrawGizmos()
     {
@@ -236,6 +280,7 @@ public class GeradorPlantas : MonoBehaviour
 
         // var currentSpline = container.AddSpline();
         var container = plantObject.AddComponent<SplineContainer>();
+        SpawnedSplines = plantObject;
 
         var currentSpline = container.AddSpline();
         currentSpline.Add(new BezierKnot(transform.position), TangentMode.AutoSmooth);
@@ -298,9 +343,10 @@ public class GeradorPlantas : MonoBehaviour
 
 
                             folhasRotacoesOriginais.Add(folha.transform.localRotation); // Guarda a rotação original da folha
+                            SpawnedObjectList.Add(folha);
                         }
                     }
-                    
+
 
                     // Flor no final do ramo
                     if (flower != null && Random.value < 0.5f) // chance de flor
@@ -322,6 +368,7 @@ public class GeradorPlantas : MonoBehaviour
 
                         // Escala aleatória leve
                         flor.transform.localScale *= Random.Range(0.9f, 1.1f);
+                        SpawnedObjectList.Add(flor);
                     }
                         
 

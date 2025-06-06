@@ -24,14 +24,12 @@ public class PlantInterface : MonoBehaviour
 
     void Start()
     {
-        /**
         playButton.onClick.AddListener(OnPlay);
         pauseButton.onClick.AddListener(OnPause);
         restartButton.onClick.AddListener(OnRestart);
-        windToggle.onValueChanged.AddListener(OnToggleWind);*/
     }
-    
-    public void getDadosPlanta(GameObject holdPoint){
+
+    public void getDadosPlanta(GameObject holdPoint) {
         if (holdPoint.transform.childCount == 0)
         {
             Debug.LogError("HoldPoint não tem objetos filhos.");
@@ -89,10 +87,18 @@ public class PlantInterface : MonoBehaviour
     }
 
 
-    /**
-    void OnPlay() => selectedPlant?.PlayGrowth();
-    void OnPause() => selectedPlant?.PauseGrowth();
-    void OnRestart() => selectedPlant?.RestartGrowth();
-    void OnToggleWind(bool isOn) => selectedPlant?.SetWind(isOn);*/
+
+    void OnPlay() {
+        selectedPlant?.DeletePlant();
+        selectedPlant?.CreatePlant(1);
+    }
+    void OnPause() {
+        selectedPlant?.DeletePlant();
+        selectedPlant?.CreatePlant(2);
+    }
+    void OnRestart() {
+        selectedPlant?.DeletePlant();
+        selectedPlant?.CreatePlant();
+    }
     
 }

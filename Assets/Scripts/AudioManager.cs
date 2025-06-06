@@ -75,8 +75,9 @@ public class AudioManager : MonoBehaviour // This is an open-source audio manage
         //Destroy the object
         Destroy(soundObj, s.Clip.length);
     }
- 
+
     //Call this method to change music tracks
+    // In our case we use this to play the passive drone sound, instead of manually playing it in a loop every 30 seconds or creating a custom loop function.
     public void ChangeMusic(SoundType type)
     {
         if (!_soundDictionary.TryGetValue(type, out Sound track))
@@ -84,14 +85,14 @@ public class AudioManager : MonoBehaviour // This is an open-source audio manage
             Debug.LogWarning($"Music track {type} not found!");
             return;
         }
- 
+
         if (_musicSource == null)
         {
             var container = new GameObject("SoundTrackObj");
             _musicSource = container.AddComponent<AudioSource>();
             _musicSource.loop = true;
         }
- 
+
         _musicSource.clip = track.Clip;
         _musicSource.Play();
     }

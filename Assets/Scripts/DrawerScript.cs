@@ -27,6 +27,7 @@ public class DrawerScript : UtilityScript
     {
         if ((OnClickActivation(drawerObject) || debugBool) && !debounce)
         {
+            AudioManager.Instance.Play(AudioManager.SoundType.CabinetOpen);
             Vector3 endPosition;
             debounce = true;
             switch (drawerOpen) {

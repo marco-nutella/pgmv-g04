@@ -27,6 +27,7 @@ public class CubicleScript : UtilityScript
 
     void MoverPorta()
     {
+        AudioManager.Instance.Play(AudioManager.SoundType.CabinetOpen);
         Vector3 direcao = abreParaEsquerda ? -transform.forward : transform.forward;
         Vector3 endPosition = posicaoInicial + direcao * moveDistance;
         
