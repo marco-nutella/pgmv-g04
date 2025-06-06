@@ -20,10 +20,6 @@ public class PlantInterface : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button restartButton;
 
-    //[Header("Toggle")]
-    //[SerializeField] private Toggle windToggle;
-
-    //private GeradorPlantasTest selectedPlant;
     private GeradorPlantas selectedPlant;
 
     void Start()
@@ -43,7 +39,6 @@ public class PlantInterface : MonoBehaviour
         }
 
         GameObject heldPlant = holdPoint.transform.GetChild(0).gameObject;
-        //selectedPlant = heldPlant.GetComponentInChildren<GeradorPlantasTest>();
         selectedPlant = heldPlant.GetComponentInChildren<GeradorPlantas>();
 
 
@@ -52,14 +47,7 @@ public class PlantInterface : MonoBehaviour
             Debug.LogError("Script GeradorPlantas não encontrado em heldPlant nem em seus filhos!");
             return;
         }
-        /**
-        axiomaInput.text = selectedPlant.axiom;
-        iterationsInput.text = selectedPlant.iterations.ToString();
-        lengthInput.text = selectedPlant.length.ToString();
-        minAngleInput.text = selectedPlant.minAngle.ToString();
-        maxAngleInput.text = selectedPlant.maxAngle.ToString();
-        speedWindInput.text = selectedPlant.windSpeed.ToString();
-        windToggle.isOn = selectedPlant.windEnabled;*/
+
         axiomaInput.text = selectedPlant.GetAxiom();
         second_axiomaInput.text = selectedPlant.GetSecondAxiom();
 
@@ -68,27 +56,12 @@ public class PlantInterface : MonoBehaviour
         minAngleInput.text = selectedPlant.GetAngleMin().ToString();
         maxAngleInput.text = selectedPlant.GetAngleMax().ToString();
         speedWindInput.text = selectedPlant.GetVelocidadeDoVento().ToString();
-        //windToggle.isOn = selectedPlant.windEnabled;
 
 
     }
 
     void Update()
     {
-        /**
-        if (selectedPlant != null)
-        {
-            // Atualizar parâmetros em tempo real
-            selectedPlant.axiom = axiomaInput.text;
-
-            int.TryParse(iterationsInput.text, out selectedPlant.iterations);
-            float.TryParse(lengthInput.text, out selectedPlant.length);
-            float.TryParse(minAngleInput.text, out selectedPlant.minAngle);
-            float.TryParse(maxAngleInput.text, out selectedPlant.maxAngle);
-            float.TryParse(speedWindInput.text, out selectedPlant.windSpeed);
-
-            selectedPlant.SetWind(windToggle.isOn);
-        }*/
         if (selectedPlant != null)
         {
             // Atualizar parâmetros em tempo real usando setters

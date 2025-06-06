@@ -7,16 +7,20 @@ using Cinemachine;
 public class openCloseInterface : MonoBehaviour
 {
     // O painel da interface para manipulação das plantas
-    public GameObject interfacePanel; 
+    [SerializeField] private GameObject interfacePanel; 
 
     // O painel da interface para instruções do robô
-    public GameObject interfaceHelp;
+    [SerializeField] private GameObject interfaceInstructions;
+
+    [SerializeField] private GameObject interfaceInteractions;
+
+    [SerializeField] private GameObject interfaceHelp;
 
     // Gameobject do robô
-    [SerializeField] GameObject robot;
-    [SerializeField] Camera targetCamera;
+    [SerializeField] private GameObject robot;
+    [SerializeField] private Camera targetCamera;
 
-    [SerializeField] CinemachineVirtualCamera targetPlanta;
+    [SerializeField] private CinemachineVirtualCamera targetPlanta;
 
 
     public LayerMask[] cullingOptions;
@@ -34,7 +38,7 @@ public class openCloseInterface : MonoBehaviour
     void Start()
     {
         interfacePanel.SetActive(false);
-        interfaceHelp.SetActive(true);
+        interfaceInstructions.SetActive(true);
         targetPlanta.gameObject.SetActive(false);
 
         GameObject mainObject = robot; // O objeto principal
@@ -70,19 +74,13 @@ public class openCloseInterface : MonoBehaviour
                 Debug.Log("Culling Mask changed to option: " + currentIndex);    
 
                 if(!interfacePanel.activeSelf){
-                    //holdPoint.layer = LayerMask.NameToLayer("ManipulacaoPlanta");
+
                     SetLayerRecursively(holdPoint,LayerMask.NameToLayer("ManipulacaoPlanta"));
-                    //holdPoint.transform.localPosition = holdPointOriginalLocalPos + new Vector3(deslocamentoLateral, 0f, 0f);
 
                     Transform planta = holdPoint.transform.GetChild(0); // A planta dentro do holdPoint
 
                     targetPlanta.Follow = planta;
                     targetPlanta.LookAt = planta;
-                    //targetPlanta.Follow = null;
-                    //targetPlanta.LookAt = null;
-
-                    //targetPlanta.transform.position = planta.position + new Vector3(-4,0,-8);
-                    //targetPlanta.transform.rotation = planta.rotation;
 
                     var transposer = targetPlanta.GetCinemachineComponent<CinemachineTransposer>();
                     if (transposer != null)
@@ -91,7 +89,9 @@ public class openCloseInterface : MonoBehaviour
                     }
 
                     targetPlanta.gameObject.SetActive(true);
-
+                    interfaceHelp.SetActive(false);
+                    interfaceInteractions.SetActive(false);
+                    interfaceInstructions.SetActive(false);
 
                 } else {
                     //holdPoint.layer = LayerMask.NameToLayer("Default");
@@ -100,6 +100,8 @@ public class openCloseInterface : MonoBehaviour
                     targetPlanta.Follow = null;
                     targetPlanta.LookAt = null;
                     targetPlanta.gameObject.SetActive(false);
+                    interfaceHelp.SetActive(true);
+                    interfaceInteractions.SetActive(true);
                 }
 
                 PlantInterface plantInterface = interfacePanel.GetComponent<PlantInterface>();
@@ -113,8 +115,6 @@ public class openCloseInterface : MonoBehaviour
                 roboInteration.blockMoveInteraction(!interfacePanel.activeSelf);
                 roboOscilacao.blockMoveInteraction(!interfacePanel.activeSelf);
 
-                //Desativa a interface de ajuda
-                interfaceHelp.SetActive(false);
 
             } else {
                 Debug.LogError("Robô não está a segurar numa planta");
@@ -125,8 +125,8 @@ public class openCloseInterface : MonoBehaviour
         {
             //Bloqueia a interface de ajuda enquanto que a interface da manipulação das plantas está ativa
             if(!interfacePanel.activeSelf){
-                bool isActive = interfaceHelp.activeSelf;
-                interfaceHelp.SetActive(!isActive);
+                bool isActive = interfaceInstructions.activeSelf;
+                interfaceInstructions.SetActive(!isActive);
             }
         }
        

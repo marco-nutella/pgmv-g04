@@ -9,11 +9,7 @@ public class MensageInteration : MonoBehaviour
     private UIMessageController messageController;
 
     void Start()
-    {
-
-        //mensage.enabled = false;
-        //messageController.HideMessage();
-       
+    {       
         messageController = FindObjectOfType<UIMessageController>();
         if (messageController == null)
         {
@@ -44,12 +40,6 @@ public class MensageInteration : MonoBehaviour
         }
     }
     
-    /**
-    public void SetMessage(string newText)
-    {
-        mensage.text = newText;
-    }*/
-
     void Update(){
     }
 }

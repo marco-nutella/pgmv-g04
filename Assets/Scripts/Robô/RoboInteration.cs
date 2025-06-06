@@ -8,6 +8,8 @@ public class GenerateArm : MonoBehaviour
 {
     [SerializeField] GameObject armPrefab;
     [SerializeField] GameObject handPrefab;
+
+    //Pode ser possivel melhorar
     [SerializeField] GameObject leftShoulderPoint;
     [SerializeField] GameObject rightShoulderPoint;
     private bool canMove = true;
@@ -33,6 +35,7 @@ public class GenerateArm : MonoBehaviour
     private Quaternion originalRotationRightShoulder;
     private Quaternion targetRotation;
 
+    //Pode ser possivel melhorar
     [SerializeField] Transform holdPoint;
     public float grabRange = 1f;
 
@@ -162,34 +165,32 @@ public class GenerateArm : MonoBehaviour
                     }
                 }
             }
-        }
 
-        if(heldObject == null){
-            Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
-            foreach (var col in colliders)
-            {
-                for (int i = 0; i < col.transform.childCount; i++) 
+            
+            if(heldObject == null){
+                Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+                foreach (var col in colliders)
                 {
-                    if(col.transform.GetChild(i).gameObject.tag == "Planta")
+                    for (int i = 0; i < col.transform.childCount; i++) 
                     {
-                
-                    //if (col.CompareTag("Planta"))
-                    //{   
-                        col.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(false);
-                        break;
+                        if(col.transform.GetChild(i).gameObject.tag == "Planta")
+                        { 
+                            col.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(false);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (int i = 0; i < heldObject.transform.childCount; i++) 
+                {
+                    if(heldObject.transform.GetChild(i).gameObject.tag == "Planta")
+                    {
+                        heldObject.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(true);
                     }
                 }
             }
-        } else {
-            for (int i = 0; i < heldObject.transform.childCount; i++) 
-            {
-                if(heldObject.transform.GetChild(i).gameObject.tag == "Planta")
-                {
-                    heldObject.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(true);
-                }
-                //heldObject.GetComponent<MensageInteration>().showMensage();
-            }
         }
+
     }
 
     private bool canGrabPlanta(){
@@ -220,8 +221,7 @@ public class GenerateArm : MonoBehaviour
 
         foreach (var col in colliders)
         {
-            //if (col.CompareTag("Planta"))
-            //{
+
             for (int i = 0; i < col.transform.childCount; i++) 
             {
                 if(col.transform.GetChild(i).gameObject.tag == "Planta")

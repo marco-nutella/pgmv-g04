@@ -100,7 +100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266592749431614579, guid: 5e43c991b96ca9b42928dfbe753f54a3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4325152722917129231, guid: 5e43c991b96ca9b42928dfbe753f54a3, type: 3}
       propertyPath: m_LocalScale.x
@@ -192,4 +192,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40ecd6c8f0406343ba376c3d9f049f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageController: {fileID: 0}
