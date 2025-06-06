@@ -37,7 +37,7 @@ public class GenerateArm : MonoBehaviour
 
     //Pode ser possivel melhorar
     [SerializeField] Transform holdPoint;
-    public float grabRange = 1f;
+    public float grabRange = 4f;
 
     private GameObject heldObject;
     private Collider heldObjectCollider;
@@ -138,7 +138,7 @@ public class GenerateArm : MonoBehaviour
         if(canMove){
             if (Input.GetKeyDown(grabKey)){
                 //Apanhar o objeto: Ver se consegue, Move os braços, agarra o objeto
-                if(heldObject == null && canGrabPlanta() && !isMovingArms){
+                if(heldObject == null && canGrabPlanta()  && !isMovingArms){
                     moveArmsMotion(true);
                 }
 
@@ -149,6 +149,12 @@ public class GenerateArm : MonoBehaviour
             }
             
             if (isMovingArms){
+                if (shouldGrabAfterMove)
+                {
+                    shouldGrabAfterMove = false;
+                    grabObject();
+                }
+
                 armMoveProgress += Time.deltaTime;
                 float t = Mathf.Clamp01(armMoveProgress / armMoveDuration);
 
@@ -158,17 +164,12 @@ public class GenerateArm : MonoBehaviour
                 if (t >= 1f)
                 {
                     isMovingArms = false;
-                    if (shouldGrabAfterMove)
-                    {
-                        shouldGrabAfterMove = false;
-                        grabObject();
-                    }
                 }
             }
 
             
             if(heldObject == null){
-                Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+                Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange); //Physics.OverlapBox(holdPoint.position, holdPoint.localScale/2.0f);
                 bool plantaEncontrada = false;
 
                 foreach (var col in colliders)
@@ -218,7 +219,8 @@ public class GenerateArm : MonoBehaviour
     }
 
     private bool canGrabPlanta(){
-        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange); //Physics.OverlapBox(holdPoint.position, holdPoint.localScale/2.0f);
+        Debug.Log(colliders);
         foreach (var col in colliders)
         {
             for (int i = 0; i < col.transform.childCount; i++)
@@ -230,9 +232,9 @@ public class GenerateArm : MonoBehaviour
                 {
                     return true;
                 }
-            
+
             }
-            
+
         }
 
         return false;
@@ -240,7 +242,7 @@ public class GenerateArm : MonoBehaviour
 
     void grabObject()
     {
-        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+        Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange); //Physics.OverlapBox(holdPoint.position, holdPoint.localScale/2.0f);
 
         float closestDistance = Mathf.Infinity;
         GameObject closestObject = null;
@@ -260,7 +262,7 @@ public class GenerateArm : MonoBehaviour
                 }
             }
 
-            if(col.transform.gameObject.tag == "PlantaMount")
+            if(col.transform.gameObject.tag == "PlantMount")
             {
                 if (col.transform.GetChild(0).gameObject.tag == "Planta"){
                     float distance = Vector3.Distance(holdPoint.position, col.transform.position);
