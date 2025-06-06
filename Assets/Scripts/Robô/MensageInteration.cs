@@ -18,15 +18,6 @@ public class MensageInteration : MonoBehaviour
         
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("PontoAgarrar") && transform.parent == null)
-        {
-            //mensage.enabled = false;
-            messageController.HideMessage();
-        }
-    }
-
     public void showMensage(bool isHeld){
         messageController.ShowMessage();
 

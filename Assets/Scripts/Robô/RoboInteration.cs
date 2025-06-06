@@ -169,17 +169,27 @@ public class GenerateArm : MonoBehaviour
             
             if(heldObject == null){
                 Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
+                bool plantaEncontrada = false;
+
                 foreach (var col in colliders)
                 {
-                    for (int i = 0; i < col.transform.childCount; i++) 
+                    for (int i = 0; i < col.transform.childCount; i++)
                     {
-                        if(col.transform.GetChild(i).gameObject.tag == "Planta")
-                        { 
+                        if (col.transform.GetChild(i).gameObject.CompareTag("Planta"))
+                        {
                             col.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(false);
+                            plantaEncontrada = true;
                             break;
                         }
                     }
                 }
+
+                if (!plantaEncontrada)
+                {
+                    UIMessageController messageController = FindObjectOfType<UIMessageController>();
+                    messageController.HideMessage();
+                }
+
             } else {
 
                 bool checkComponent = false;
