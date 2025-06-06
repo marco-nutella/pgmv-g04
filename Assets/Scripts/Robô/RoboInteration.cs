@@ -175,12 +175,18 @@ public class GenerateArm : MonoBehaviour
                 {
                     for (int i = 0; i < col.transform.childCount; i++)
                     {
-                        if (col.transform.GetChild(i).gameObject.CompareTag("Planta"))
+                        Transform child = col.transform.GetChild(i);
+
+                        // Busca recursiva no objeto filho e em seus subobjetos
+                        MensageInteration mensage = child.GetComponentInChildren<MensageInteration>();
+
+                        if (mensage != null)
                         {
-                            col.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(false);
+                            mensage.showMensage(false);
                             plantaEncontrada = true;
-                            break;
+                            break; // Interrompe o loop após encontrar o primeiro objeto válido
                         }
+
                     }
                 }
 
@@ -192,7 +198,6 @@ public class GenerateArm : MonoBehaviour
 
             } else {
 
-                bool checkComponent = false;
                 for (int i = 0; i < heldObject.transform.childCount; i++) 
                 {
                     Transform child = heldObject.transform.GetChild(i);
@@ -202,7 +207,6 @@ public class GenerateArm : MonoBehaviour
 
                     if (mensage != null)
                     {
-                        checkComponent = true;
                         mensage.showMensage(true);
                         break; // Interrompe o loop após encontrar o primeiro objeto válido
                     }
@@ -217,10 +221,18 @@ public class GenerateArm : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
         foreach (var col in colliders)
         {
-            if(col.transform.gameObject.tag == "Planta")
+            for (int i = 0; i < col.transform.childCount; i++)
             {
-                return true;
+                Transform child = col.transform.GetChild(i);
+                MensageInteration mensage = child.GetComponentInChildren<MensageInteration>();
+
+                if (mensage != null)
+                {
+                    return true;
+                }
+            
             }
+            
         }
 
         return false;
@@ -237,7 +249,20 @@ public class GenerateArm : MonoBehaviour
         foreach (var col in colliders)
         {
             if(col.transform.gameObject.tag == "Planta")
+            {
+                float distance = Vector3.Distance(holdPoint.position, col.transform.position);
+
+                if (distance < closestDistance)
                 {
+                    closestDistance = distance;
+                    closestObject = col.gameObject;
+                    closestCollider = col;
+                }
+            }
+
+            if(col.transform.gameObject.tag == "PlantaMount")
+            {
+                if (col.transform.GetChild(0).gameObject.tag == "Planta"){
                     float distance = Vector3.Distance(holdPoint.position, col.transform.position);
 
                     if (distance < closestDistance)
@@ -246,7 +271,8 @@ public class GenerateArm : MonoBehaviour
                         closestObject = col.gameObject;
                         closestCollider = col;
                     }
-                }
+                }                
+            }
             /**
             for (int i = 0; i < col.transform.childCount; i++) 
             {
