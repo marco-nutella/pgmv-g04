@@ -181,13 +181,23 @@ public class GenerateArm : MonoBehaviour
                     }
                 }
             } else {
+
+                bool checkComponent = false;
                 for (int i = 0; i < heldObject.transform.childCount; i++) 
                 {
-                    if(heldObject.transform.GetChild(i).gameObject.tag == "Planta")
+                    Transform child = heldObject.transform.GetChild(i);
+
+                    // Busca recursiva no objeto filho e em seus subobjetos
+                    MensageInteration mensage = child.GetComponentInChildren<MensageInteration>();
+
+                    if (mensage != null)
                     {
-                        heldObject.transform.GetChild(i).GetComponent<MensageInteration>().showMensage(true);
+                        checkComponent = true;
+                        mensage.showMensage(true);
+                        break; // Interrompe o loop após encontrar o primeiro objeto válido
                     }
                 }
+
             }
         }
 
@@ -197,15 +207,10 @@ public class GenerateArm : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(holdPoint.position, grabRange);
         foreach (var col in colliders)
         {
-            //if (col.CompareTag("Planta"))
-            for (int i = 0; i < col.transform.childCount; i++) 
+            if(col.transform.gameObject.tag == "Planta")
             {
-                if(col.transform.GetChild(i).gameObject.tag == "Planta")
-                {
-                    return true;
-                }
+                return true;
             }
-                
         }
 
         return false;
@@ -221,7 +226,18 @@ public class GenerateArm : MonoBehaviour
 
         foreach (var col in colliders)
         {
+            if(col.transform.gameObject.tag == "Planta")
+                {
+                    float distance = Vector3.Distance(holdPoint.position, col.transform.position);
 
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestObject = col.gameObject;
+                        closestCollider = col;
+                    }
+                }
+            /**
             for (int i = 0; i < col.transform.childCount; i++) 
             {
                 if(col.transform.GetChild(i).gameObject.tag == "Planta")
@@ -235,7 +251,7 @@ public class GenerateArm : MonoBehaviour
                         closestCollider = col;
                     }
                 }
-            }
+            }*/
         }
 
         if (closestObject != null)
